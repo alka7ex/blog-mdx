@@ -1,10 +1,11 @@
 import Link from "next/link";
 import Image from "next/image";
+import { Button } from "@/components/ui/button";
 
 export async function fetchFeatured() {
   const res = await fetch(
     process.env.NEXT_PUBLIC_STRAPI_URL +
-      "/api/posts?populate=*&filters[featured][$eq]=true"
+    "/api/posts?populate=*&filters[featured][$eq]=true"
   );
   const jsonData = await res.json();
   // console.log(JSON.stringify(jsonData))
@@ -20,7 +21,7 @@ const Featured = async ({ slug }) => {
         <div className="flex min-h-full m-auto rounded-2xl">
           <div className="m-auto">
             <Link href={"/blog/" + jsonData.data[0].attributes.slug}>
-              <Image  
+              <Image
                 src={
                   process.env.NEXT_PUBLIC_STRAPI_URL +
                   jsonData.data[0].attributes.thumbnail.data[0].attributes
@@ -40,7 +41,7 @@ const Featured = async ({ slug }) => {
             </Link>
           </div>
         </div>
-        <div className="  ">
+        <div className="bg-red-200">
           <div className="flex min-h-full m-auto">
             <div className="max-w-full p-5 m-auto">
               <Link href={"/blog/" + jsonData.data[0].attributes.slug}>
@@ -48,18 +49,19 @@ const Featured = async ({ slug }) => {
                   {jsonData.data[0].attributes.title}
                 </h1>
               </Link>
-              <div className="flex flex-col textarea-bordered">
-                <div className="container h-24 overflow-hidden md:h-32 lg:h-56">
-                  <h5 className="textarea-bordered text-clip ">
-                    {jsonData.data[0].attributes.content}
-                  </h5>
-                </div>
+              <div className="container h-24 overflow-hidden md:h-32 lg:h-56">
+                <h5 className="textarea-bordered text-clip ">
+                  {jsonData.data[0].attributes.content}
+                </h5>
               </div>
               <div className="container flex justify-end w-auto mx-2 my-8">
                 <Link href={"/blog/" + jsonData.data[0].attributes.slug}>
-                  <button className="relative btn btn-sm sm:btn-sm md:btn-md lg:btn-lg w-28">
-                    Read More
-                  </button>
+                  <div className="card-actions justify-end">
+                    <Button
+                      variant="outline">
+                      Read More
+                    </Button>
+                  </div>
                 </Link>
               </div>
             </div>
