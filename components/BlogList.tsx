@@ -10,7 +10,77 @@ import {
 } from "@/components/ui/card"
 import { Button } from "@/components/ui/button";
 
-export async function fetchFeatured() {
+
+interface HomepageData {
+  data: [
+    {
+      attributes: {
+        title: string;
+        slug: string;
+        content: string;
+        featured: boolean;
+        createdAt: Date;
+        updatedAt: Date;
+        altthumbnail: string;
+        descriptions: null | string;
+        thumbnail: {
+          data: [
+            {
+              id: number;
+              attributes: {
+                name: string;
+                alternativeText: null | string;
+                caption: null;
+                width: number;
+                height: number;
+                hash: string;
+                ext: string;
+                mime: string;
+                size: number;
+                url: string;
+                previewUrl: null;
+                provider: string;
+                provider_metadata: null;
+                createdAt: Date;
+                updatedAt: Date;
+                formats: {
+                  thumbnail: {
+                    name: string;
+                    hash: string;
+                    ext: string;
+                    mime: string;
+                    path: null;
+                    width: number;
+                    height: number;
+                    size: number;
+                    url: string;
+                  }
+                  small: {
+                    name: string;
+                    hash: string;
+                    ext: string;
+                    mime: string;
+                    path: null;
+                    width: number;
+                    height: number;
+                    size: number;
+                    url: string;
+                  }
+                }
+              }
+            }
+          ];
+        };
+      };
+    }
+  ];
+}
+
+interface FeaturedHomepageProps {
+  jsonData: HomepageData;
+}
+
+export async function fetchFeatured(): Promise<HomepageData> {
   const res = await fetch(
     process.env.NEXT_PUBLIC_STRAPI_URL + "/api/posts?populate=*"
   );
@@ -19,13 +89,13 @@ export async function fetchFeatured() {
   return jsonData;
 }
 
-const BlogList = async ({ slug }) => {
-  const jsonData = await fetchFeatured(slug);
+const BlogList: React.FC<FeaturedHomepageProps> = async ({ jsonData }) => {
+  const datas = await fetchFeatured();
   // console.log(meta_data);
   return (
     <div className="h-auto w-auto mx-auto">
       <div className="container grid grid-cols-1 mx-auto space-y-5 md:grid-cols-2 lg:space-y-0">
-        {jsonData.data.slice(0, 4).map((data) => (
+        {datas.data.slice(0, 4).map((data) => (
           <div className="flex flex-col">
             <CardTitle className="m-6">
               <Link href={"/blog/" + data.attributes.slug}>

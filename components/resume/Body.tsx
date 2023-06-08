@@ -22,8 +22,8 @@ async function fetchBody(): Promise<ResumeData> {
   return jsonData;
 }
 
-const BodyResume: React.FC<BodyResumeProps> = ({ jsonData }) => {
-  const resumedatas = jsonData;
+const BodyResume: React.FC<BodyResumeProps> = async ({ jsonData }) => {
+  const resumedatas = await fetchBody();
   return (
     <div className=" px-4 pb-16 mx-auto md:mx-12 lg:mx-16 my-auto">
       <h2 className="my-4 text-2xl font-bold" >Work Experience</h2>

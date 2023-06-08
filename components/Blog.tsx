@@ -1,7 +1,77 @@
 import Image from "next/image";
 import Link from "next/link";
+import React from "react";
 
-export async function fetchBlog(slug) {
+interface BlogData {
+  data: [
+    {
+      attributes: {
+        title: string;
+        slug: string;
+        content: string;
+        featured: boolean;
+        createdAt: string;
+        updatedAt: string;
+        altthumbnail: string;
+        descriptions: null | string;
+        thumbnail: {
+          data: [
+            {
+              id: number;
+              attributes: {
+                name: string;
+                alternativeText: null | string;
+                caption: null;
+                width: number;
+                height: number;
+                hash: string;
+                ext: string;
+                mime: string;
+                size: number;
+                url: string;
+                previewUrl: null;
+                provider: string;
+                provider_metadata: null;
+                createdAt: Date;
+                updatedAt: Date;
+                formats: {
+                  thumbnail: {
+                    name: string;
+                    hash: string;
+                    ext: string;
+                    mime: string;
+                    path: null;
+                    width: number;
+                    height: number;
+                    size: number;
+                    url: string;
+                  }
+                  small: {
+                    name: string;
+                    hash: string;
+                    ext: string;
+                    mime: string;
+                    path: null;
+                    width: number;
+                    height: number;
+                    size: number;
+                    url: string;
+                  }
+                }
+              }
+            }
+          ];
+        };
+      };
+    }
+  ];
+}
+
+interface BlogProps {
+  jsonData: BlogData;
+}
+
+export async function fetchBlog(slug: string): Promise<BlogData> {
   const res = await fetch(
     process.env.NEXT_PUBLIC_STRAPI_URL +
     "/api/posts?populate=*&filters[slug][$eq]=" +
@@ -12,8 +82,8 @@ export async function fetchBlog(slug) {
   return jsonData;
 }
 
-const Blog = async ({ slug }) => {
-  const jsonData = await fetchBlog(slug);
+const Blog: React.FC<BlogData> = async ({ jsonData }) => {
+  const datas = await fetchBlog(jsonData);
   // console.log(meta_data);
   return (
     <div className="">
@@ -25,7 +95,6 @@ const Blog = async ({ slug }) => {
                 src="/1682770822163.jpg"
                 width={500}
                 height={500}
-                // className="max-w-sm shadow-2xl"
                 alt="Farhienza Haikal"
               />
             </div>
@@ -33,7 +102,7 @@ const Blog = async ({ slug }) => {
         </Link>
         <div className="container flex-col mx-8 my-auto">
           <h4 className="text-sm font-bold my-2 md:text-md">
-            {jsonData.data[0].attributes.createdAt}
+            {datas.data[0].attributes.createdAt}
           </h4>
           <Link href="/resume">
             <h2 className="text-xl font-bold my-2 md:text-2xl">
@@ -47,24 +116,24 @@ const Blog = async ({ slug }) => {
       </div>
       <div>
         <div className="container px-4 pb-16 mx-auto">
-          <Link href={"/blog/" + jsonData.data[0].attributes.slug}>
+          <Link href={"/blog/" + datas.data[0].attributes.slug}>
             <Image
               src={
                 process.env.NEXT_PUBLIC_STRAPI_URL +
-                jsonData.data[0].attributes.thumbnail.data[0].attributes.url
+                datas.data[0].attributes.thumbnail.data[0].attributes.url
               }
               width={549}
               height={309}
-              alt={jsonData.data[0].attributes.altthumbnail}
+              alt={datas.data[0].attributes.altthumbnail}
               className="rounded-2xl mx-auto"
             />
           </Link>
           <div className="mx-auto prose prose-2xl:">
             <h1 className="my-8 text-2xl font-bold prose prose-h1:">
-              {jsonData.data[0].attributes.title}
+              {datas.data[0].attributes.title}
             </h1>
             <p className="max-w-none prose prose-p:">
-              {jsonData.data[0].attributes.content}
+              {datas.data[0].attributes.content}
             </p>
           </div>
         </div>
