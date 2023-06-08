@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Blog from "../../../components/Blog";
+import Blog from "@/components/Blog";
 
 export async function generateMetadata({ params: { slug } }) {
   const res = await fetch(

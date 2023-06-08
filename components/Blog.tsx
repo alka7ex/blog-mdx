@@ -4,8 +4,8 @@ import Link from "next/link";
 export async function fetchBlog(slug) {
   const res = await fetch(
     process.env.NEXT_PUBLIC_STRAPI_URL +
-      "/api/posts?populate=*&filters[slug][$eq]=" +
-      slug
+    "/api/posts?populate=*&filters[slug][$eq]=" +
+    slug
   );
   const jsonData = await res.json();
   // console.log(JSON.stringify(jsonData))
@@ -59,17 +59,17 @@ const Blog = async ({ slug }) => {
               className="rounded-2xl mx-auto"
             />
           </Link>
-          <div className="mx-auto prose prose-2xl">
+          <div className="mx-auto prose prose-2xl:">
             <h1 className="my-8 text-2xl font-bold prose prose-h1:">
               {jsonData.data[0].attributes.title}
             </h1>
-            <div className="container prose max-w-none prose-p:">
+            <p className="max-w-none prose prose-p:">
               {jsonData.data[0].attributes.content}
-            </div>
+            </p>
           </div>
         </div>
       </div>
-    </div>
+    </div >
   );
 };
 

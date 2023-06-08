@@ -1,5 +1,13 @@
 import Link from "next/link";
 import Image from "next/image";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
 import { Button } from "@/components/ui/button";
 
 export async function fetchFeatured() {
@@ -41,30 +49,18 @@ const Featured = async ({ slug }) => {
             </Link>
           </div>
         </div>
-        <div className="bg-red-200">
+        <div className="">
           <div className="flex min-h-full m-auto">
-            <div className="max-w-full p-5 m-auto">
+            <div className="flex flex-col">
+            <CardTitle className="m-6">
               <Link href={"/blog/" + jsonData.data[0].attributes.slug}>
-                <h1 className="text-2xl truncate my-4">
-                  {jsonData.data[0].attributes.title}
-                </h1>
+                <h2 className="card-title">{jsonData.data[0].attributes.title}</h2>
               </Link>
-              <div className="container h-24 overflow-hidden md:h-32 lg:h-56">
-                <h5 className="textarea-bordered text-clip ">
-                  {jsonData.data[0].attributes.content}
-                </h5>
-              </div>
-              <div className="container flex justify-end w-auto mx-2 my-8">
-                <Link href={"/blog/" + jsonData.data[0].attributes.slug}>
-                  <div className="card-actions justify-end">
-                    <Button
-                      variant="outline">
-                      Read More
-                    </Button>
-                  </div>
-                </Link>
-              </div>
-            </div>
+            </CardTitle>
+            <CardContent className="">
+              <p className="h-24 overflow-hidden">{jsonData.data[0].attributes.content}</p>
+            </CardContent>
+          </div>
           </div>
         </div>
       </div>

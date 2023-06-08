@@ -16,20 +16,17 @@ interface BodyResumeProps {
   jsonData: ResumeData;
 }
 
-
-export async function fetchBody(): Promise<ResumeData> {
+async function fetchBody(): Promise<ResumeData> {
   const res = await fetch(process.env.NEXT_PUBLIC_STRAPI_URL + "/api/resumes");
   const jsonData = await res.json();
-  // console.log(JSON.stringify(jsonData))
   return jsonData;
 }
 
-const BodyResume: React.FC<BodyResumeProps> = async ({ jsonData }) => {
-  const resumedatas = await fetchBody();
-  // console.log(meta_data);
+const BodyResume: React.FC<BodyResumeProps> = ({ jsonData }) => {
+  const resumedatas = jsonData;
   return (
     <div className=" px-4 pb-16 mx-auto md:mx-12 lg:mx-16 my-auto">
-      <h2 className="my-4 text-2xl font-bold">Work Experience</h2>
+      <h2 className="my-4 text-2xl font-bold" >Work Experience</h2>
       <div className="prose max-w-none">
         <Markdown>{resumedatas.data[0].attributes.experience}</Markdown>
       </div>

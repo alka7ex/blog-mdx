@@ -14,10 +14,8 @@ const page = async () => {
   console.log(datas.data);
   return (
     <div className='flex flex-col w-auto mx-0 mt-5 space-y-5'>
-      <Featured>
-      </Featured>
-      <BlogList>
-      </BlogList>
+      <section><Featured></Featured></section>
+      <section><BlogList></BlogList></section>
     </div>
   )
 }
