@@ -25,8 +25,8 @@ export async function fetchHeader(): Promise<ResumeData> {
   return jsonData;
 }
 
-const HeaderResume: React.FC<HeaderResumeProps> = ({ jsonData }) => {
-  const resumedatas = jsonData;
+const HeaderResume: React.FC<HeaderResumeProps> = async ({ jsonData }) => {
+  const resumedatas = await fetchHeader();
   // console.log(meta_data);
   return (
     <div className="mx-auto px-4 md:px-8">
