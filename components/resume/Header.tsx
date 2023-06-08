@@ -1,14 +1,32 @@
 import Image from "next/image";
 
-export async function fetchHeader() {
+
+interface ResumeData {
+  data: {
+    attributes: {
+      experience: string;
+      skills: string;
+      tools: string;
+      education: string;
+      course: string;
+      summary: string;
+    };
+  }[];
+}
+
+interface HeaderResumeProps {
+  jsonData: ResumeData;
+}
+
+export async function fetchHeader(): Promise<ResumeData> {
   const res = await fetch(process.env.NEXT_PUBLIC_STRAPI_URL + "/api/resumes");
   const jsonData = await res.json();
   // console.log(JSON.stringify(jsonData))
   return jsonData;
 }
 
-const HeaderResume = async ({ jsonData }) => {
-  const resumedatas = await fetchHeader();
+const HeaderResume: React.FC<HeaderResumeProps> = ({ jsonData }) => {
+  const resumedatas = jsonData;
   // console.log(meta_data);
   return (
     <div className="mx-auto px-4 md:px-8">
