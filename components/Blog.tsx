@@ -1,7 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import { getAllJSDocTagsOfKind } from "typescript";
 
 export interface Props {
   data: PropsDatum[];
@@ -88,6 +87,7 @@ export async function fetchBlog(slug: string): Promise<Props> {
     slug
   );
   const jsonData = await res.json();
+  console.log('blog nich' ,jsonData)
   return jsonData;
 }
 
@@ -95,8 +95,7 @@ export async function fetchBlog(slug: string): Promise<Props> {
 
 const Blog: React.FC<Props> = async ({ slug }: Props) => {
   const datas = await fetchBlog(slug);
-  console.log('haikal '+ datas);
-  return (
+    return (
     <div className="">
       <div className="container flex flex-cols mt-8 mb-12 mx-8 xl:pl-24">
         <Link href="/resume">
