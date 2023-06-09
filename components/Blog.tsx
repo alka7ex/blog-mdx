@@ -1,90 +1,101 @@
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import { getAllJSDocTagsOfKind } from "typescript";
 
-interface BlogData {
-  data: [
-    {
-      attributes: {
-        title: string;
-        slug: string;
-        content: string;
-        featured: boolean;
-        createdAt: string;
-        updatedAt: string;
-        altthumbnail: string;
-        descriptions: null | string;
-        thumbnail: {
-          data: [
-            {
-              id: number;
-              attributes: {
-                name: string;
-                alternativeText: null | string;
-                caption: null;
-                width: number;
-                height: number;
-                hash: string;
-                ext: string;
-                mime: string;
-                size: number;
-                url: string;
-                previewUrl: null;
-                provider: string;
-                provider_metadata: null;
-                createdAt: Date;
-                updatedAt: Date;
-                formats: {
-                  thumbnail: {
-                    name: string;
-                    hash: string;
-                    ext: string;
-                    mime: string;
-                    path: null;
-                    width: number;
-                    height: number;
-                    size: number;
-                    url: string;
-                  }
-                  small: {
-                    name: string;
-                    hash: string;
-                    ext: string;
-                    mime: string;
-                    path: null;
-                    width: number;
-                    height: number;
-                    size: number;
-                    url: string;
-                  }
-                }
-              }
-            }
-          ];
-        };
-      };
-    }
-  ];
+export interface Props {
+  data: PropsDatum[];
+  meta: Meta;
+  slug: string;
 }
 
-interface BlogProps {
-  jsonData: BlogData;
+export interface PropsDatum {
+  id: number;
+  attributes: PurpleAttributes;
 }
 
-export async function fetchBlog(slug: string): Promise<BlogData> {
+export interface PurpleAttributes {
+  title: string;
+  slug: string;
+  content: string;
+  featured: boolean;
+  createdAt: string;
+  updatedAt: string;
+  altthumbnail: string;
+  descriptions: null | string;
+  thumbnail: Thumbnail;
+}
+
+export interface Thumbnail {
+  data: ThumbnailDatum[];
+}
+
+export interface ThumbnailDatum {
+  id: number;
+  attributes: FluffyAttributes;
+}
+
+export interface FluffyAttributes {
+  name: string;
+  alternativeText: null | string;
+  caption: null;
+  width: number;
+  height: number;
+  formats: Formats;
+  hash: string;
+  ext: string;
+  mime: string;
+  size: number;
+  url: string;
+  previewUrl: null;
+  provider: string;
+  provider_metadata: null;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface Formats {
+  thumbnail: Small;
+  small: Small;
+}
+
+export interface Small {
+  name: string;
+  hash: string;
+  ext: string;
+  mime: string;
+  path: null;
+  width: number;
+  height: number;
+  size: number;
+  url: string;
+}
+
+export interface Meta {
+  pagination: Pagination;
+}
+
+export interface Pagination {
+  page: number;
+  pageSize: number;
+  pageCount: number;
+  total: number;
+}
+export async function fetchBlog(slug: string): Promise<Props> {
   const res = await fetch(
     process.env.NEXT_PUBLIC_STRAPI_URL +
     "/api/posts?populate=*&filters[slug][$eq]=" +
     slug
   );
   const jsonData = await res.json();
-  // console.log(JSON.stringify(jsonData))
   return jsonData;
 }
 
-const Blog: React.FC<BlogData> = async ({ jsonData }) => {
-  const datas = await fetchBlog(jsonData);
-  // console.log(meta_data);
+
+
+const Blog: React.FC<Props> = async ({ slug }: Props) => {
+  const datas = await fetchBlog(slug);
+  console.log('haikal '+ datas);
   return (
     <div className="">
       <div className="container flex flex-cols mt-8 mb-12 mx-8 xl:pl-24">
@@ -102,7 +113,7 @@ const Blog: React.FC<BlogData> = async ({ jsonData }) => {
         </Link>
         <div className="container flex-col mx-8 my-auto">
           <h4 className="text-sm font-bold my-2 md:text-md">
-            {datas.data[0].attributes.createdAt}
+            {/* {datas.} */}
           </h4>
           <Link href="/resume">
             <h2 className="text-xl font-bold my-2 md:text-2xl">
@@ -130,7 +141,7 @@ const Blog: React.FC<BlogData> = async ({ jsonData }) => {
           </Link>
           <div className="mx-auto prose prose-2xl:">
             <h1 className="my-8 text-2xl font-bold prose prose-h1:">
-              {datas.data[0].attributes.title}
+            {datas.data[0].attributes.title}
             </h1>
             <p className="max-w-none prose prose-p:">
               {datas.data[0].attributes.content}

@@ -13,76 +13,91 @@ import React from "react";
 import { json } from "stream/consumers";
 import { data } from "autoprefixer";
 
-interface HomepageData {
-  data: [
-    {
-      attributes: {
-        title: string;
-        slug: string;
-        content: string;
-        featured: boolean;
-        createdAt: Date;
-        updatedAt: Date;
-        altthumbnail: string;
-        descriptions: null | string;
-        thumbnail: {
-          data: [
-            {
-              id: number;
-              attributes: {
-                name: string;
-                alternativeText: null | string;
-                caption: null;
-                width: number;
-                height: number;
-                hash: string;
-                ext: string;
-                mime: string;
-                size: number;
-                url: string;
-                previewUrl: null;
-                provider: string;
-                provider_metadata: null;
-                createdAt: Date;
-                updatedAt: Date;
-                formats: {
-                  thumbnail: {
-                    name: string;
-                    hash: string;
-                    ext: string;
-                    mime: string;
-                    path: null;
-                    width: number;
-                    height: number;
-                    size: number;
-                    url: string;
-                  }
-                  small: {
-                    name: string;
-                    hash: string;
-                    ext: string;
-                    mime: string;
-                    path: null;
-                    width: number;
-                    height: number;
-                    size: number;
-                    url: string;
-                  }
-                }
-              }
-            }
-          ];
-        };
-      };
-    }
-  ];
+
+export interface Props {
+  data: PropsDatum[];
+  meta: Meta;
 }
 
-interface FeaturedHomepageProps {
-  jsonData: HomepageData;
+export interface PropsDatum {
+  id:         number;
+  attributes: PurpleAttributes;
 }
 
-export async function fetchFeatured(): Promise<HomepageData> {
+export interface PurpleAttributes {
+  title:        string;
+  slug:         string;
+  content:      string;
+  featured:     boolean;
+  createdAt:    string;
+  updatedAt:    string;
+  altthumbnail: string;
+  descriptions: null | string;
+  thumbnail:    Thumbnail;
+}
+
+export interface Thumbnail {
+  data: ThumbnailDatum[];
+}
+
+export interface ThumbnailDatum {
+  id:         number;
+  attributes: FluffyAttributes;
+}
+
+export interface FluffyAttributes {
+  name:              string;
+  alternativeText:   null | string;
+  caption:           null;
+  width:             number;
+  height:            number;
+  formats:           Formats;
+  hash:              string;
+  ext:               string;
+  mime:              string;
+  size:              number;
+  url:               string;
+  previewUrl:        null;
+  provider:          string;
+  provider_metadata: null;
+  createdAt:         string;
+  updatedAt:         string;
+}
+
+export interface Formats {
+  thumbnail: Small;
+  small:     Small;
+}
+
+export interface Small {
+  name:   string;
+  hash:   string;
+  ext:    string;
+  mime:   string;
+  path:   null;
+  width:  number;
+  height: number;
+  size:   number;
+  url:    string;
+}
+
+export interface Meta {
+  pagination: Pagination;
+}
+
+export interface Pagination {
+  page:      number;
+  pageSize:  number;
+  pageCount: number;
+  total:     number;
+}
+
+export interface UpperPrpos{
+  props : Props;
+}
+
+
+export async function fetchFeatured(): Promise<Props> {
   const res = await fetch(
     process.env.NEXT_PUBLIC_STRAPI_URL +
     "/api/posts?populate=*&filters[featured][$eq]=true"
@@ -91,7 +106,7 @@ export async function fetchFeatured(): Promise<HomepageData> {
   return jsonData;
 }
 
-const Featured: React.FC<FeaturedHomepageProps> = async ({ jsonData }) => {
+const Featured: React.FC<Props> = async ({ }) => {
   const datas = await fetchFeatured();
   return (
     <div className="">
