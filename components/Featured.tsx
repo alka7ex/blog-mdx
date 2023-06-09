@@ -127,7 +127,7 @@ const Featured: React.FC<Props> = async ({ }) => {
                   datas.data[0].attributes.thumbnail.data[0].attributes
                     .formats.small.height
                 }
-                alt="Picture of the author"
+                alt={datas.data[0].attributes.altthumbnail}
                 className="rounded-2xl"
               />
             </Link>
