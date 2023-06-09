@@ -1,22 +1,39 @@
 import Image from "next/image";
 
 
-interface ResumeData {
-  data: {
-    attributes: {
-      experience: string;
-      skills: string;
-      tools: string;
-      education: string;
-      course: string;
-      summary: string;
-    };
-  }[];
+export interface ResumeData {
+  data: Datum[];
+  meta: Meta;
 }
 
-interface HeaderResumeProps {
-  jsonData: ResumeData;
+export interface Datum {
+  id:         number;
+  attributes: Attributes;
 }
+
+export interface Attributes {
+  bio:        string;
+  experience: string;
+  skills:     string;
+  tools:      string;
+  education:  string;
+  course:     string;
+  createdAt:  Date;
+  updatedAt:  Date;
+  summary:    string;
+}
+
+export interface Meta {
+  pagination: Pagination;
+}
+
+export interface Pagination {
+  page:      number;
+  pageSize:  number;
+  pageCount: number;
+  total:     number;
+}
+
 
 export async function fetchHeader(): Promise<ResumeData> {
   const res = await fetch(process.env.NEXT_PUBLIC_STRAPI_URL + "/api/resumes");
@@ -25,7 +42,7 @@ export async function fetchHeader(): Promise<ResumeData> {
   return jsonData;
 }
 
-const HeaderResume: React.FC<HeaderResumeProps> = async ({ jsonData }) => {
+const HeaderResume: React.FC<Attributes> = async ({  }) => {
   const resumedatas = await fetchHeader();
   // console.log(meta_data);
   return (
