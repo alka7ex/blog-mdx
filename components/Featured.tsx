@@ -12,6 +12,7 @@ import { Button } from "@/components/ui/button";
 import React from "react";
 import { json } from "stream/consumers";
 import { data } from "autoprefixer";
+import TagSearch from "./TagSearch";
 
 
 export interface Props {
@@ -20,20 +21,21 @@ export interface Props {
 }
 
 export interface PropsDatum {
-  id:         number;
+  id: number;
   attributes: PurpleAttributes;
 }
 
 export interface PurpleAttributes {
-  title:        string;
-  slug:         string;
-  content:      string;
-  featured:     boolean;
-  createdAt:    string;
-  updatedAt:    string;
+  title: string;
+  slug: string;
+  content: string;
+  featured: boolean;
+  createdAt: string;
+  updatedAt: string;
   altthumbnail: string;
   descriptions: null | string;
-  thumbnail:    Thumbnail;
+  thumbnail: Thumbnail;
+  tag: string[];
 }
 
 export interface Thumbnail {
@@ -41,44 +43,44 @@ export interface Thumbnail {
 }
 
 export interface ThumbnailDatum {
-  id:         number;
+  id: number;
   attributes: FluffyAttributes;
 }
 
 export interface FluffyAttributes {
-  name:              string;
-  alternativeText:   null | string;
-  caption:           null;
-  width:             number;
-  height:            number;
-  formats:           Formats;
-  hash:              string;
-  ext:               string;
-  mime:              string;
-  size:              number;
-  url:               string;
-  previewUrl:        null;
-  provider:          string;
+  name: string;
+  alternativeText: null | string;
+  caption: null;
+  width: number;
+  height: number;
+  formats: Formats;
+  hash: string;
+  ext: string;
+  mime: string;
+  size: number;
+  url: string;
+  previewUrl: null;
+  provider: string;
   provider_metadata: null;
-  createdAt:         string;
-  updatedAt:         string;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export interface Formats {
   thumbnail: Small;
-  small:     Small;
+  small: Small;
 }
 
 export interface Small {
-  name:   string;
-  hash:   string;
-  ext:    string;
-  mime:   string;
-  path:   null;
-  width:  number;
+  name: string;
+  hash: string;
+  ext: string;
+  mime: string;
+  path: null;
+  width: number;
   height: number;
-  size:   number;
-  url:    string;
+  size: number;
+  url: string;
 }
 
 export interface Meta {
@@ -86,14 +88,14 @@ export interface Meta {
 }
 
 export interface Pagination {
-  page:      number;
-  pageSize:  number;
+  page: number;
+  pageSize: number;
   pageCount: number;
-  total:     number;
+  total: number;
 }
 
-export interface UpperPrpos{
-  props : Props;
+export interface UpperPrpos {
+  props: Props;
 }
 
 
@@ -108,6 +110,7 @@ export async function fetchFeatured(): Promise<Props> {
 
 const Featured: React.FC<Props> = async ({ }) => {
   const datas = await fetchFeatured();
+  console.log("data tagging ", datas.data[0].attributes.tag)
   return (
     <div className="">
       <div className="container grid w-auto h-auto grid-cols-1 p-5 mx-auto space-y-5 md:grid-cols-2 md:space-y-0 md:space-x-5 ">
@@ -137,6 +140,17 @@ const Featured: React.FC<Props> = async ({ }) => {
           <div className="flex min-h-full m-auto">
             <div className="flex flex-col">
               <CardTitle className="m-6">
+                <div className="flex flex-row"> {/* Wrap the tags in a single div with flex layout */}
+                  {datas.data[0].attributes.tag.map((data) => (
+                    <div className="flex flex-row"> {/* Use a single div for each tag */}
+                      <Link href="#">
+                        <Button className="w-auto h-auto">
+                          {data}
+                        </Button>
+                      </Link>
+                    </div>
+                  ))}
+                </div>
                 <Link href={"/blog/" + datas.data[0].attributes.slug}>
                   <h2 className="card-title">{datas.data[0].attributes.title}</h2>
                 </Link>
@@ -148,7 +162,7 @@ const Featured: React.FC<Props> = async ({ }) => {
           </div>
         </div>
       </div>
-    </div>
+    </div >
   );
 };
 
