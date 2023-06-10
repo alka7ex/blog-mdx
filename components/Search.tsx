@@ -11,6 +11,7 @@ export const Search = () => {
         event.preventDefault();
         const encodedSearchQuery = encodeURI(searchQuery);
         router.push(`/search?q=${encodedSearchQuery}`);
+        setSearchQuery(''); // Reset searchQuery to an empty string
     }
     return (
         <form onSubmit={onSearch}>

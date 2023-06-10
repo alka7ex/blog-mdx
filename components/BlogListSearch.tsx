@@ -101,10 +101,14 @@ const Searchpage = async () => {
     console.log("search params ", encodedSearchQuery);
     const res = await fetch(
         process.env.NEXT_PUBLIC_STRAPI_URL +
-        "/api/posts?populate=*&filters[title][$contains]=" + encodedSearchQuery
+        "/api/posts?populate=*&filters[$or][0][title][$contains]=" +
+        encodedSearchQuery + "&filters[$or][1][slug][$contains]=" +
+        encodedSearchQuery + "&filters[$or][2][content][$contains]=" +
+        encodedSearchQuery + "&filters[$or][3][altthumbnail][$contains]=" +
+        encodedSearchQuery + "&filters[$or][4][descriptions][$contains]=" +
+        encodedSearchQuery
     );
     const jsonData = await res.json();
-    const jsonStringify = JSON.stringify(jsonData)
     console.log("json data output ", jsonData);
     return (
         <div className="h-auto w-auto mx-auto">
