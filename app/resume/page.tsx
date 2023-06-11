@@ -1,5 +1,6 @@
 import HeaderResume from "@/components/resume/Header";
 import BodyResume from "@/components/resume/Body";
+import TagSearch from "@/components/TagSearch";
 
 export interface ResumeData {
   data: Datum[];

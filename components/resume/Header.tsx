@@ -49,7 +49,7 @@ const HeaderResume: React.FC<Attributes> = async ({  }) => {
     <div className="mx-auto px-4 md:px-8">
       <div className="flex flex-col md:flex-row-reverse mx-auto">
         <Image
-          src="/1682770822163.jpg"
+          src="/1682770822163.webp"
           width={500}
           height={500}
           // className="max-w-sm shadow-2xl"

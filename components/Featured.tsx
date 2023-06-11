@@ -163,7 +163,7 @@ const Featured: React.FC<Props> = async ({ }) => {
                         <div key={tag.id}>
                           <Link href={"/tags?q=" + tag.attributes.name_tag}>
                             <Button className="w-auto h-auto">
-                              {tag.attributes.name_tag}
+                              {tag.attributes.name_tag.replace(/-/g, ' ')}
                             </Button>
                           </Link>
                         </div>

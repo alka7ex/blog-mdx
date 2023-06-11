@@ -12,7 +12,8 @@ import {
 } from "@/components/ui/card"
 import { Button } from "@/components/ui/button";
 import { useSearchParams } from 'next/navigation'
-import React from 'react'
+import React, { useEffect } from 'react';
+import qs from 'qs';
 
 export interface Props {
     slug: string;
@@ -100,12 +101,18 @@ const TagSearch = async () => {
     const searchQuery = search ? search.get("q") : null;
     const encodedSearchQuery = encodeURI(searchQuery || '');
     console.log("search params ", encodedSearchQuery);
-    const res = await fetch(
-        process.env.NEXT_PUBLIC_STRAPI_URL +
-        "/api/posts?populate=*&filters[tag][$contains]="+encodedSearchQuery
-    );
+    const query = qs.stringify({
+        filters: {
+            tags: {
+                name_tag: { $contains: encodedSearchQuery }
+            }
+        },
+        populate: ["tags", "thumbnail"],
+    },);
+    console.log(query)
+    const res = await fetch(process.env.NEXT_PUBLIC_STRAPI_URL + `/api/posts?${query}`);
     const jsonData = await res.json();
-    console.log("json data output ", jsonData);
+    console.log("TagOutput ", jsonData);
     return (
         <div className="h-auto w-auto mx-auto">
             <div className="container grid grid-cols-1 mx-auto space-y-5 md:grid-cols-2 lg:space-y-0">

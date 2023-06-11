@@ -1,17 +1,13 @@
 import React from 'react'
-import { Input } from '@/components/ui/input'
+import TagsButton from '@/components/TagsButton'
 
-const Search = () => {
+const Testpage = () => {
     
     return (
         <div>
-            <div>
-                Search
-            </div>
-            <Input>
-            </Input>
+            <TagsButton></TagsButton>
         </div>
     )
 }
 
-export default Search
+export default Testpage
