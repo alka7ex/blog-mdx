@@ -35,7 +35,7 @@ export interface PurpleAttributes {
   altthumbnail: string;
   descriptions: null | string;
   thumbnail: Thumbnail;
-  tag: string[];
+  tags: Propstags;
 }
 
 export interface Thumbnail {
@@ -98,6 +98,22 @@ export interface UpperPrpos {
   props: Props;
 }
 
+export interface Propstags {
+  data: Datum[];
+  meta: Meta;
+}
+
+export interface Datum {
+  id: number;
+  attributes: Attributes;
+}
+
+export interface Attributes {
+  name_tag: string;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
 
 export async function fetchFeatured(): Promise<Props> {
   const res = await fetch(
@@ -140,14 +156,18 @@ const Featured: React.FC<Props> = async ({ }) => {
           <div className="flex min-h-full m-auto">
             <div className="flex flex-col">
               <CardTitle className="m-6">
-                <div className="flex flex-row"> {/* Wrap the tags in a single div with flex layout */}
-                  {datas.data[0].attributes.tag.map((data) => (
-                    <div className="flex flex-row"> {/* Use a single div for each tag */}
-                      <Link href="#">
-                        <Button className="w-auto h-auto">
-                          {data}
-                        </Button>
-                      </Link>
+                <div className="flex flex-row">
+                  {datas.data.map((post) => (
+                    <div className="flex flex-row" key={post.id}>
+                      {post.attributes.tags.data.map((tag) => (
+                        <div key={tag.id}>
+                          <Link href={"/tags?q=" + tag.attributes.name_tag}>
+                            <Button className="w-auto h-auto">
+                              {tag.attributes.name_tag.replace(/-/g, ' ')}
+                            </Button>
+                          </Link>
+                        </div>
+                      ))}
                     </div>
                   ))}
                 </div>

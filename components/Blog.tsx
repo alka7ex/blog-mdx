@@ -87,7 +87,7 @@ export async function fetchBlog(slug: string): Promise<Props> {
     slug
   );
   const jsonData = await res.json();
-  console.log('blog nich' ,jsonData)
+  console.log("data blog ya ini",jsonData)
   return jsonData;
 }
 
@@ -102,7 +102,7 @@ const Blog: React.FC<Props> = async ({ slug }: Props) => {
           <div className="avatar">
             <div className="w-24 h-24 my-auto rounded-full">
               <Image
-                src="/1682770822163.jpg"
+                src="/1682770822163_small.webp"
                 width={500}
                 height={500}
                 alt="Farhienza Haikal"
