@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Blog from "@/components/Blog";
-
+import qs from 'qs';
 
 export interface Props {
   params: {
@@ -12,13 +12,15 @@ export interface Props {
 
 
 export async function generateMetadata({ params: { slug }}: Props) {
+  const query = qs.stringify({
+    filters: {
+    },
+    populate: ["tags"],
+  },);
   const res = await fetch(
-    process.env.NEXT_PUBLIC_STRAPI_URL +
-      "/api/posts?populate=*&filters[slug][$eq]=" +
-      slug
+    process.env.NEXT_PUBLIC_STRAPI_URL + `/api/posts?${query}`
   );
-  const data = await res.json();
-  const meta = data;
+  const meta = await res.json();
   return {
     title: meta.data[0].attributes.title,
     description: meta.data[0].attributes.description,

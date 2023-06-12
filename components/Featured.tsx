@@ -13,6 +13,7 @@ import React from "react";
 import { json } from "stream/consumers";
 import { data } from "autoprefixer";
 import TagSearch from "./TagSearch";
+import qs from 'qs';
 
 
 export interface Props {
@@ -116,17 +117,22 @@ export interface Attributes {
 
 
 export async function fetchFeatured(): Promise<Props> {
+  const query = qs.stringify({
+    filters: {
+        featured : {$eq: true}
+    },
+    populate: ["tags","thumbnail"],
+  },);
   const res = await fetch(
-    process.env.NEXT_PUBLIC_STRAPI_URL +
-    "/api/posts?populate=*&filters[featured][$eq]=true"
+    process.env.NEXT_PUBLIC_STRAPI_URL + `/api/posts?${query}`
   );
   const jsonData = await res.json();
+  console.log("data bloglist", jsonData);
   return jsonData;
 }
 
 const Featured: React.FC<Props> = async ({ }) => {
   const datas = await fetchFeatured();
-  console.log("data tagging ", datas.data[0].attributes.tag)
   return (
     <div className="">
       <div className="container grid w-auto h-auto grid-cols-1 p-5 mx-auto space-y-5 md:grid-cols-2 md:space-y-0 md:space-x-5 ">

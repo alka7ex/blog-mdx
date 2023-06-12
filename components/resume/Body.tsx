@@ -41,6 +41,7 @@ async function fetchBody(): Promise<ResumeData> {
   const res = await fetch(process.env.NEXT_PUBLIC_STRAPI_URL + "/api/resumes");
   const jsonData = await res.json();
   return jsonData;
+  
 }
 
 const BodyResume: React.FC<Attributes> = async ({ }) => {

@@ -46,7 +46,6 @@ export const TagsButton = () => {
         }
         getData()
     }, [])
-    console.log("result",searchQuery)
     const router = useRouter();
     const handleClick = (tag : string) => {
         router.push(`/tags?q=${tag}`);

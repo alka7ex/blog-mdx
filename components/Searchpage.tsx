@@ -113,7 +113,7 @@ const Searchpage = async () => {
     return (
         <div className="h-auto w-auto mx-auto">
             <div className="container grid grid-cols-1 mx-auto space-y-5 md:grid-cols-2 lg:space-y-0">
-                {jsonData.data.slice(0, 4).map((data: PropsDatum) => (
+                {jsonData.data.map((data: PropsDatum) => (
                     <div className="flex flex-col">
                         <CardHeader>
                             <Link href={"/blog/" + data.attributes.slug}>
