@@ -9,7 +9,7 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import { Button } from "@/components/ui/button";
-
+import qs from 'qs';
 
 
 export interface Props {
@@ -114,22 +114,26 @@ export interface Attributes {
 
 
 export async function fetchFeatured(): Promise<Props> {
+  const query = qs.stringify({
+    filters: {
+    },
+    populate: ["tags"],
+  },);
   const res = await fetch(
-    process.env.NEXT_PUBLIC_STRAPI_URL + "/api/posts?populate=*"
+    process.env.NEXT_PUBLIC_STRAPI_URL + `/api/posts?${query}`
   );
   const jsonData = await res.json();
-  // console.log(JSON.stringify(jsonData))
+  console.log("data bloglist", jsonData);
   return jsonData;
 }
 
 const BlogList: React.FC<Props> = async ({ }: Props) => {
   const datas = await fetchFeatured();
-  console.log(datas)
-  // console.log(meta_data);
+  console.log("array check",Array.isArray(datas.data[0].attributes.tags));
   return (
     <div className="h-auto w-auto mx-auto">
       <div className="container grid grid-cols-1 mx-auto space-y-5 md:grid-cols-2 lg:space-y-0">
-        {datas.data.slice(0, 4).map((post) => (
+        {datas.data.map((post) => (
           <div className="flex flex-col" key={post.id}>
             <CardTitle className="m-6">
               <Link href={"/blog/" + post.attributes.slug}>

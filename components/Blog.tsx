@@ -86,8 +86,9 @@ export async function fetchBlog(slug: string): Promise<Props> {
     "/api/posts?populate=*&filters[slug][$eq]=" +
     slug
   );
+
+  
   const jsonData = await res.json();
-  console.log("data blog ya ini",jsonData)
   return jsonData;
 }
 

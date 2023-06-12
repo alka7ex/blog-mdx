@@ -100,7 +100,6 @@ const TagSearch = async () => {
     const search = useSearchParams();
     const searchQuery = search ? search.get("q") : null;
     const encodedSearchQuery = encodeURI(searchQuery || '');
-    console.log("search params ", encodedSearchQuery);
     const query = qs.stringify({
         filters: {
             tags: {
@@ -109,14 +108,12 @@ const TagSearch = async () => {
         },
         populate: ["tags", "thumbnail"],
     },);
-    console.log(query)
     const res = await fetch(process.env.NEXT_PUBLIC_STRAPI_URL + `/api/posts?${query}`);
     const jsonData = await res.json();
-    console.log("TagOutput ", jsonData);
     return (
         <div className="h-auto w-auto mx-auto">
             <div className="container grid grid-cols-1 mx-auto space-y-5 md:grid-cols-2 lg:space-y-0">
-                {jsonData.data.slice(0, 4).map((data: PropsDatum) => (
+                {jsonData.data.map((data: PropsDatum) => (
                     <div className="flex flex-col">
                         <CardHeader>
                             <Link href={"/blog/" + data.attributes.slug}>
