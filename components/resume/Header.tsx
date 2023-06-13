@@ -1,3 +1,4 @@
+import { dataHeaderresume } from "@/app/api/fetch";
 import Image from "next/image";
 
 
@@ -35,16 +36,9 @@ export interface Pagination {
 }
 
 
-export async function fetchHeader(): Promise<ResumeData> {
-  const res = await fetch(process.env.NEXT_PUBLIC_STRAPI_URL + "/api/resumes");
-  const jsonData = await res.json();
-  // console.log(JSON.stringify(jsonData))
-  return jsonData;
-}
 
 const HeaderResume: React.FC<Attributes> = async ({  }) => {
-  const resumedatas = await fetchHeader();
-  // console.log(meta_data);
+  const resumedatas = await dataHeaderresume();
   return (
     <div className="mx-auto px-4 md:px-8">
       <div className="flex flex-col md:flex-row-reverse mx-auto">
@@ -52,7 +46,6 @@ const HeaderResume: React.FC<Attributes> = async ({  }) => {
           src="/1682770822163.webp"
           width={500}
           height={500}
-          // className="max-w-sm shadow-2xl"
           alt="Farhienza Haikal"
           className="max-w-sm rounded-2xl h-72 md:h-96 w-max mx-auto object-contain shadow-2xl"
         />

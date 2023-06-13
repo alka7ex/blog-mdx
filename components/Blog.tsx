@@ -1,3 +1,4 @@
+import { dataBlog } from "@/app/api/fetch";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -80,22 +81,9 @@ export interface Pagination {
   pageCount: number;
   total: number;
 }
-export async function fetchBlog(slug: string): Promise<Props> {
-  const res = await fetch(
-    process.env.NEXT_PUBLIC_STRAPI_URL +
-    "/api/posts?populate=*&filters[slug][$eq]=" +
-    slug
-  );
-
-  
-  const jsonData = await res.json();
-  return jsonData;
-}
-
-
 
 const Blog: React.FC<Props> = async ({ slug }: Props) => {
-  const datas = await fetchBlog(slug);
+  const datas = await dataBlog(slug);
     return (
     <div className="">
       <div className="container flex flex-cols mt-8 mb-12 mx-8 xl:pl-24">
