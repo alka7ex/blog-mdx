@@ -13,6 +13,8 @@ import {
 import { Button } from "@/components/ui/button";
 import { useSearchParams } from 'next/navigation'
 import React from 'react'
+import { normalSearchdata } from '@/app/api/fetch'
+
 
 export interface Props {
     slug: string;
@@ -95,25 +97,11 @@ export interface Pagination {
 }
 
 const Searchpage = async () => {
-    const search = useSearchParams();
-    const searchQuery = search ? search.get("q") : null;
-    const encodedSearchQuery = encodeURI(searchQuery || '');
-    console.log("search params ", encodedSearchQuery);
-    const res = await fetch(
-        process.env.NEXT_PUBLIC_STRAPI_URL +
-        "/api/posts?populate=*&filters[$or][0][title][$contains]=" +
-        encodedSearchQuery + "&filters[$or][1][slug][$contains]=" +
-        encodedSearchQuery + "&filters[$or][2][content][$contains]=" +
-        encodedSearchQuery + "&filters[$or][3][altthumbnail][$contains]=" +
-        encodedSearchQuery + "&filters[$or][4][descriptions][$contains]=" +
-        encodedSearchQuery
-    );
-    const jsonData = await res.json();
-    console.log("json data output ", jsonData);
+    const datas = await normalSearchdata();
     return (
         <div className="h-auto w-auto mx-auto">
             <div className="container grid grid-cols-1 mx-auto space-y-5 md:grid-cols-2 lg:space-y-0">
-                {jsonData.data.map((data: PropsDatum) => (
+                {datas.data.map((data: PropsDatum) => (
                     <div className="flex flex-col">
                         <CardHeader>
                             <Link href={"/blog/" + data.attributes.slug}>

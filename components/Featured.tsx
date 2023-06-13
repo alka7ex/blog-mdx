@@ -1,20 +1,12 @@
 import Link from "next/link";
 import Image from "next/image";
 import {
-  Card,
   CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
   CardTitle,
 } from "@/components/ui/card"
 import { Button } from "@/components/ui/button";
 import React from "react";
-import { json } from "stream/consumers";
-import { data } from "autoprefixer";
-import TagSearch from "./TagSearch";
-import qs from 'qs';
-
+import { dataFeatured } from "@/app/api/fetch";
 
 export interface Props {
   data: PropsDatum[];
@@ -115,24 +107,8 @@ export interface Attributes {
   updatedAt: Date;
 }
 
-
-export async function fetchFeatured(): Promise<Props> {
-  const query = qs.stringify({
-    filters: {
-        featured : {$eq: true}
-    },
-    populate: ["tags","thumbnail"],
-  },);
-  const res = await fetch(
-    process.env.NEXT_PUBLIC_STRAPI_URL + `/api/posts?${query}`
-  );
-  const jsonData = await res.json();
-  console.log("data bloglist", jsonData);
-  return jsonData;
-}
-
 const Featured: React.FC<Props> = async ({ }) => {
-  const datas = await fetchFeatured();
+  const datas = await dataFeatured();
   return (
     <div className="">
       <div className="container grid w-auto h-auto grid-cols-1 p-5 mx-auto space-y-5 md:grid-cols-2 md:space-y-0 md:space-x-5 ">

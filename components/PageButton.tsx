@@ -5,8 +5,6 @@ import { Button } from './ui/button';
 import React, { useEffect, useState } from 'react'
 import { get } from 'http';
 import { getEnvironmentData } from 'worker_threads';
-import { fetchTagsData } from '@/app/api/fetch';
-
 
 
 export interface Props {
@@ -37,18 +35,20 @@ export interface Pagination {
 }
 
 
-export const TagsButton = () => {
+export const PageButton = () => {
     const [searchQuery, setSearchQuery] = useState([]);
     useEffect(() => {
         async function getData(){
-            const data = await fetchTagsData();
+            const response = await fetch (process.env.NEXT_PUBLIC_STRAPI_URL +
+            "/api/posts?populate=*")
+            const data = await response.json();
             setSearchQuery(data);
         }
         getData()
     }, [])
     const router = useRouter();
-    const handleClick = (tag : string) => {
-        router.push(`/tags?q=${tag}`);
+    const handleClick = (pageNumber : string) => {
+        router.push(`/?page=${pageNumber}`);
     };
     return (
         <Button
@@ -61,4 +61,4 @@ export const TagsButton = () => {
 }
 
 
-export default TagsButton
+export default PageButton

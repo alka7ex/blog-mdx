@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/card"
 import { Button } from "@/components/ui/button";
 import qs from 'qs';
+import { dataBloglist } from "@/app/api/fetch";
 
 
 export interface Props {
@@ -112,23 +113,8 @@ export interface Attributes {
 }
 
 
-
-export async function fetchFeatured(): Promise<Props> {
-  const query = qs.stringify({
-    filters: {
-    },
-    populate: ["tags"],
-  },);
-  const res = await fetch(
-    process.env.NEXT_PUBLIC_STRAPI_URL + `/api/posts?${query}`
-  );
-  const jsonData = await res.json();
-  console.log("data bloglist", jsonData);
-  return jsonData;
-}
-
 const BlogList: React.FC<Props> = async ({ }: Props) => {
-  const datas = await fetchFeatured();
+  const datas = await dataBloglist();
   console.log("array check",Array.isArray(datas.data[0].attributes.tags));
   return (
     <div className="h-auto w-auto mx-auto">
@@ -156,6 +142,9 @@ const BlogList: React.FC<Props> = async ({ }: Props) => {
             </CardContent>
           </div>
         ))}
+      </div>
+      <div>
+        
       </div>
     </div>
   );

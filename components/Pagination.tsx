@@ -12,21 +12,22 @@ import {
 } from "@/components/ui/card"
 import { Button } from "@/components/ui/button";
 import { useSearchParams } from 'next/navigation'
-import React, { useEffect } from 'react';
-import qs from 'qs';
-import {tagSearchdata} from "@/app/api/fetch";
+import React from 'react'
+import { dataPagination } from "@/app/api/fetch";
 
 export interface Props {
+    slug: string;
+    encodedSearchQuery: string;
     data: PropsDatum[];
     meta: Meta;
-  }
-  
-  export interface PropsDatum {
+}
+
+export interface PropsDatum {
     id: number;
     attributes: PurpleAttributes;
-  }
-  
-  export interface PurpleAttributes {
+}
+
+export interface PurpleAttributes {
     title: string;
     slug: string;
     content: string;
@@ -36,19 +37,18 @@ export interface Props {
     altthumbnail: string;
     descriptions: null | string;
     thumbnail: Thumbnail;
-    tags: Propstags;
-  }
-  
-  export interface Thumbnail {
+}
+
+export interface Thumbnail {
     data: ThumbnailDatum[];
-  }
-  
-  export interface ThumbnailDatum {
+}
+
+export interface ThumbnailDatum {
     id: number;
     attributes: FluffyAttributes;
-  }
-  
-  export interface FluffyAttributes {
+}
+
+export interface FluffyAttributes {
     name: string;
     alternativeText: null | string;
     caption: null;
@@ -65,14 +65,14 @@ export interface Props {
     provider_metadata: null;
     createdAt: string;
     updatedAt: string;
-  }
-  
-  export interface Formats {
+}
+
+export interface Formats {
     thumbnail: Small;
     small: Small;
-  }
-  
-  export interface Small {
+}
+
+export interface Small {
     name: string;
     hash: string;
     ext: string;
@@ -82,42 +82,21 @@ export interface Props {
     height: number;
     size: number;
     url: string;
-  }
-  
-  export interface Meta {
+}
+
+export interface Meta {
     pagination: Pagination;
-  }
-  
-  export interface Pagination {
+}
+
+export interface Pagination {
     page: number;
     pageSize: number;
     pageCount: number;
     total: number;
-  }
-  
-  export interface UpperPrpos {
-    props: Props;
-  }
-  
-  export interface Propstags {
-    data: Datum[];
-    meta: Meta;
-  }
-  
-  export interface Datum {
-    id: number;
-    attributes: Attributes;
-  }
-  
-  export interface Attributes {
-    name_tag: string;
-    createdAt: Date;
-    updatedAt: Date;
-  }
-  
+}
 
-const TagSearch = async () => {
-    const datas = await tagSearchdata();
+const paginationSearch = async () => {
+    const datas = dataPagination();
     return (
         <div className="h-auto w-auto mx-auto">
             <div className="container grid grid-cols-1 mx-auto space-y-5 md:grid-cols-2 lg:space-y-0">
@@ -158,4 +137,4 @@ const TagSearch = async () => {
     )
 }
 
-export default TagSearch
+export default paginationSearch
