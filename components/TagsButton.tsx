@@ -9,6 +9,7 @@ import { fetchTagsData } from '@/app/api/fetch';
 
 
 
+
 export interface Props {
     data: Datum[];
     meta: Meta;
