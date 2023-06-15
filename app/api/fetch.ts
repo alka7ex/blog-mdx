@@ -147,7 +147,6 @@ export async function dataFeatured(): Promise<Props> {
     process.env.NEXT_PUBLIC_STRAPI_URL + `/api/posts?${query}`
   );
   const jsonData = await res.json();
-  console.log("data bloglist", jsonData);
   return jsonData;
 }
 
@@ -162,6 +161,9 @@ export async function dataBloglist(): Promise<Props> {
   const res = await fetch(
     process.env.NEXT_PUBLIC_STRAPI_URL + `/api/posts?${query}`
   );
+  if (!res.ok) {
+    throw new Error(`Error: ${res.status} - ${res.statusText}`);
+  }
   const jsonData = await res.json();
   console.log("data bloglist", jsonData);
   return jsonData;
@@ -202,17 +204,16 @@ export async function normalSearchdata(): Promise<Props> {
   return jsonData;
 }
 
-
+// PAGINATION BLOCK
 export async function dataPagination(): Promise<Props> {
-  const search = useSearchParams();
-  const searchQuery = search ? search.get("q") : null;
-  const encodedSearchQuery = encodeURI(searchQuery || '');
-  console.log("search params ", encodedSearchQuery);
+  const pageSize = 3
+  const pageNumber = 1
   const res = await fetch(
     process.env.NEXT_PUBLIC_STRAPI_URL +
-    "/api/posts?populate=*&pagination[page]=" + { encodedSearchQuery } + "&pagination[pageSize]=3&sort=createdAt:desc"
+    "/api/posts?populate=*&pagination[page]="+{pageNumber}+"&pagination[pageSize]="+{pageSize}+"&sort=createdAt:desc"
   );
   const jsonData = await res.json();
+  console.log("jsonData", jsonData);
   return jsonData;
 }
 
