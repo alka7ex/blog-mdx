@@ -1,0 +1,20 @@
+
+> blog-haikal@0.1.0 lint
+> next lint
+
+- info Loaded env from /home/haikal/project-blog/blog-haikal/.env
+
+./app/api/fetch.ts
+179:18  Error: React Hook "useSearchParams" is called in function "tagSearchdata" that is neither a React function component nor a custom React Hook function. React component names must start with an uppercase letter. React Hook names must start with the word "use".  react-hooks/rules-of-hooks
+197:18  Error: React Hook "useSearchParams" is called in function "normalSearchdata" that is neither a React function component nor a custom React Hook function. React component names must start with an uppercase letter. React Hook names must start with the word "use".  react-hooks/rules-of-hooks
+
+./components/Featured.tsx
+143:21  Error: Missing "key" prop for element in iterator  react/jsx-key
+
+./components/Searchpage.tsx
+105:21  Error: Missing "key" prop for element in iterator  react/jsx-key
+
+./components/TagSearch.tsx
+125:21  Error: Missing "key" prop for element in iterator  react/jsx-key
+
+info  - Need to disable some ESLint rules? Learn more here: https://nextjs.org/docs/basic-features/eslint#disabling-rules

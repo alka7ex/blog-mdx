@@ -25,7 +25,7 @@ export const metadata = {
 export default function RootLayout({ children }: {children: ReactNode}) {
   return (
     <html lang="en">
-      <body className=''>
+      <body className='mx-0'>
         <section><Navbar /></section>
         <section className='md:mx-10 lg:mx-15 xl:mx-20'>{children}</section>
         <section><Footer /></section>

@@ -1,10 +1,10 @@
 import React from 'react'
 import Searchpage from '@/components/Searchpage'
-import TagSearch from '@/components/TagSearch'
+import BlogListWithPagination from '@/components/Searchpage'
 
 const page = () => {
   return (
-    <div className='min-h-screen'><Searchpage/><TagSearch></TagSearch></div>
+    <div className='min-h-screen'><BlogListWithPagination></BlogListWithPagination></div>
   )
 }
 

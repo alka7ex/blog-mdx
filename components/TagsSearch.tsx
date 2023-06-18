@@ -19,6 +19,7 @@ import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import PageButton from "@/components/PageButton";
 import { collapseTextChangeRangesAcrossMultipleVersions } from "typescript";
+import qs from "qs";
 
 export interface Props {
     data: PropsDatum[];
@@ -129,10 +130,18 @@ const BlogList: React.FC<Props> = () => {
     const search = useSearchParams();
     const searchQuery = search ? search.get("q") : null;
     const encodedSearchQuery = encodeURI(searchQuery || '');
-    const fetchProjects = (page, searchQuery) => {
+    const query = qs.stringify({
+        filters: {
+            tags: {
+                name_tag: { $contains: encodedSearchQuery }
+            }
+        },
+        populate: ["tags", "thumbnail"],
+    },);
+    const fetchProjects = () => {
         const encodedSearchQuery = encodeURI(searchQuery || '');
         return fetch(process.env.NEXT_PUBLIC_STRAPI_URL +
-            `/api/posts?populate=*&filters[$or][0][title][$contains]=${encodedSearchQuery}&filters[$or][1][slug][$contains]=${encodedSearchQuery}&filters[$or][2][content][$contains]=${encodedSearchQuery}&filters[$or][3][altthumbnail][$contains]=${encodedSearchQuery}&filters[$or][4][descriptions][$contains]=${encodedSearchQuery}&pagination[page]=${page}&pagination[pageSize]=${pageSize}&sort=createdAt:desc`)
+            `/api/posts?${query}`)
             .then((res) => res.json());
     };
 
@@ -148,11 +157,11 @@ const BlogList: React.FC<Props> = () => {
         isFetching,
         isRefetching,
         data
-    } = useQuery(['projects', page, searchQuery], () => fetchProjects(page, searchQuery), {
+    } = useQuery({
+        queryKey: ['projects', page,searchQuery],
+        queryFn: () => fetchProjects(page,searchQuery),
         keepPreviousData: true
     })
-
-
 
     if (isLoading) {
         return <div>Loading...</div>;
@@ -169,12 +178,11 @@ const BlogList: React.FC<Props> = () => {
     console.log("Fetching", isFetching);
     console.log("refetching", isRefetching);
     console.log("page number: ", page)
-    console.log("params", encodedSearchQuery)
     return (
         <div>
             <div className="h-auto w-auto mx-auto flex flex-col">
                 <div className="container grid grid-cols-1 mx-auto space-y-5 md:grid-cols-2 lg:space-y-0">
-                    {data?.data.map((post) => (
+                    {data.data.map((post) => (
                         <div className="flex flex-col" key={post.id}>
                             <CardHeader>
                                 <Link href={"/blog/" + post.attributes.slug}>
@@ -232,11 +240,11 @@ const BlogList: React.FC<Props> = () => {
     );
 };
 
-const BlogListWithPagination = () => (
+const TagSearch = () => (
     <QueryClientProvider client={queryClient}>
         <BlogList />
         <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
 );
 
-export default BlogListWithPagination;
+export default TagSearch;

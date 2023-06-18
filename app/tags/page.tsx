@@ -1,6 +1,5 @@
 import React from 'react'
-import Searchpage from '@/components/Searchpage'
-import TagSearch from '@/components/TagSearch'
+import TagSearch from '@/components/TagsSearch'
 
 const page = () => {
   return (
