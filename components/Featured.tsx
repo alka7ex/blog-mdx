@@ -140,11 +140,11 @@ const Featured: React.FC<Props> = async ({ }) => {
               <CardTitle className="m-6">
                 <div className="flex flex-row">
                   {datas.data.map((post) => (
-                    <div className="flex flex-row" key={post.id}>
+                    <div className="flex flex-row"> {/* Wrap the tags in a single div with flex layout */}
                       {post.attributes.tags.data.map((tag) => (
-                        <div key={tag.id}>
+                        <div className="flex flex-col md:flex-row mx-max bg-transparent" key={tag.id}> {/* Use a single div for each tag */}
                           <Link href={"/tags?q=" + tag.attributes.name_tag}>
-                            <Button className="w-auto h-auto">
+                            <Button className="justify-start p-1 w-auto h-auto text-xs">
                               {tag.attributes.name_tag.replace(/-/g, ' ')}
                             </Button>
                           </Link>

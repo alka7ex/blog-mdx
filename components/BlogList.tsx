@@ -18,6 +18,7 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { useSearchParams } from "next/navigation";
 import { useState } from "react";
 import PageButton from "@/components/PageButton";
+import { collapseTextChangeRangesAcrossMultipleVersions } from "typescript";
 
 export interface Props {
   data: PropsDatum[];
@@ -138,10 +139,11 @@ const BlogList: React.FC<Props> = () => {
     error,
     isPreviousData,
     isFetching,
+    isRefetching,
     data
   } = useQuery({
     queryKey: ['projects', page],
-    queryFn: () => fetchProjects(),
+    queryFn: () => fetchProjects(page),
     keepPreviousData: true
   })
 
@@ -156,23 +158,45 @@ const BlogList: React.FC<Props> = () => {
   const nextPage = () => setPage(prev => prev + 1);
   const prevPage = () => setPage(prev => prev - 1);
   const pagesArray = Array(data.meta.pagination.pageCount).fill(0).map((_, index) => index + 1);
-  console.log("titit", data);
-  console.log(isError)
+  console.log("API Response", data);
+  console.log("Fetching", isFetching);
+  console.log("refetching", isRefetching);
+  console.log("page number: ", page)
   return (
     <div>
       <div className="h-auto w-auto mx-auto flex flex-col">
         <div className="container grid grid-cols-1 mx-auto space-y-5 md:grid-cols-2 lg:space-y-0">
           {data.data.map((post) => (
             <div className="flex flex-col" key={post.id}>
+              <CardHeader>
+                <Link href={"/blog/" + post.attributes.slug}>
+                  <Image
+                    src={
+                      process.env.NEXT_PUBLIC_STRAPI_URL +
+                      post.attributes.thumbnail.data[0].attributes.url
+                    }
+                    width={
+                      post.attributes.thumbnail.data[0].attributes
+                        .formats.small.width
+                    }
+                    height={
+                      post.attributes.thumbnail.data[0].attributes
+                        .formats.small.height
+                    }
+                    alt="Picture of the author"
+                    className="rounded-2xl"
+                  />
+                </Link>
+              </CardHeader>
               <CardTitle className="m-6">
                 <Link href={"/blog/" + post.attributes.slug}>
                   <h2 className="card-title">{post.attributes.title}</h2>
                 </Link>
                 <div className="flex flex-row"> {/* Wrap the tags in a single div with flex layout */}
                   {post.attributes.tags.data.map((tag) => (
-                    <div className="flex flex-row" key={tag.id}> {/* Use a single div for each tag */}
+                    <div className="flex flex-col md:flex-row mx-max bg-transparent" key={tag.id}> {/* Use a single div for each tag */}
                       <Link href={"/tags?q=" + tag.attributes.name_tag}>
-                        <Button className="w-auto h-auto">
+                        <Button className="justify-start p-1 w-auto h-auto text-xs  bg-transparent">
                           {tag.attributes.name_tag.replace(/-/g, ' ')}
                         </Button>
                       </Link>
@@ -181,7 +205,7 @@ const BlogList: React.FC<Props> = () => {
                 </div>
               </CardTitle>
               <CardContent className="">
-                <p className="h-24 overflow-hidden">{post.attributes.content}</p>
+                <div className="h-24 overflow-hidden">{post.attributes.content}</div>
               </CardContent>
             </div>
           ))}
