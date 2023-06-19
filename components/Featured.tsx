@@ -114,7 +114,7 @@ const Featured: React.FC<Props> = async ({ }) => {
       <div className="container grid w-auto h-auto grid-cols-1 p-5 mx-auto space-y-5 md:grid-cols-2 md:space-y-0 md:space-x-5 ">
         <div className="flex min-h-full m-auto rounded-2xl">
           <div className="m-auto">
-            <a href={"/blog/" + datas.data[0].attributes.slug}>
+            <Link href={"/blog/" + datas.data[0].attributes.slug}>
               <Image
                 src={
                   process.env.NEXT_PUBLIC_STRAPI_URL +
@@ -131,7 +131,7 @@ const Featured: React.FC<Props> = async ({ }) => {
                 alt={datas.data[0].attributes.altthumbnail}
                 className="rounded-2xl"
               />
-            </a>
+            </Link>
           </div>
         </div>
         <div className="">
@@ -143,19 +143,19 @@ const Featured: React.FC<Props> = async ({ }) => {
                     <div className="flex flex-row"> {/* Wrap the tags in a single div with flex layout */}
                       {post.attributes.tags.data.map((tag) => (
                         <div className="flex flex-col md:flex-row mx-max bg-transparent" key={tag.id}> {/* Use a single div for each tag */}
-                          <a href={"/tags?q=" + tag.attributes.name_tag}>
+                          <Link href={"/tags?q=" + tag.attributes.name_tag}>
                             <Button className="justify-start p-1 w-auto h-auto text-xs">
                               {tag.attributes.name_tag.replace(/-/g, ' ')}
                             </Button>
-                          </a>
+                          </Link>
                         </div>
                       ))}
                     </div>
                   ))}
                 </div>
-                <a href={"/blog/" + datas.data[0].attributes.slug}>
+                <Link href={"/blog/" + datas.data[0].attributes.slug}>
                   <h2 className="card-title">{datas.data[0].attributes.title}</h2>
-                </a>
+                </Link>
               </CardTitle>
               <CardContent className="">
                 <p className="h-24 overflow-hidden">{datas.data[0].attributes.content}</p>
