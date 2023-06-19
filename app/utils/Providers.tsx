@@ -3,7 +3,7 @@
 import BlogListWithPagination from '@/components/BlogList'
 import Featured from '@/components/Featured'
 import HydratedBlogList from '@/components/HydratedBlogList';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { QueryClient, QueryClientProvider, useQueryClient } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import React from 'react'
 
@@ -88,9 +88,8 @@ export interface Pagination {
 }
 
 
-const Providers = async ({ data,meta }) => {
-    const [queryClient] = React.useState(() => new QueryClient())
-
+const Providers =  ({ data, meta }: Props) => {
+    const queryClient = new QueryClient()
     return (
         <QueryClientProvider client={queryClient}>
             <Featured data={data} meta={meta}></Featured>

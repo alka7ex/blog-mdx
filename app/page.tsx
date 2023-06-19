@@ -79,7 +79,7 @@ export interface Pagination {
   total: number;
 }
 
-const page = async ({ data, meta }: Props) => {
+const page = () => {
   return (
     <div className='flex flex-col w-auto mx-0 mt-5 space-y-5'>
       <Providers>

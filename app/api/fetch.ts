@@ -156,6 +156,23 @@ export async function dataFeatured(): Promise<Props> {
   return jsonData;
 }
 
+export function dataFeatured2(): Promise<Props> {
+  const query = qs.stringify({
+    filters: {
+      featured: { $eq: true }
+    },
+    populate: ["tags", "thumbnail"],
+  },);
+  const res = fetch(process.env.NEXT_PUBLIC_STRAPI_URL +
+    `/api/posts?${query}`)
+    .then((res) => res.json());
+  const jsonData = res;
+  return jsonData;
+}
+
+
+
+
 export async function dataBloglist(): Promise<Props> {
   const query = qs.stringify({
     pagination: {
@@ -199,7 +216,7 @@ export async function normalSearchdata(): Promise<Props> {
   const encodedSearchQuery = encodeURI(searchQuery || '');
   const res = await fetch(
     process.env.NEXT_PUBLIC_STRAPI_URL +
-`/api/posts?populate=*&filters[$or][0][title][$contains]=${encodedSearchQuery}&filters[$or][1][slug][$contains]=${encodedSearchQuery}&filters[$or][2][content][$contains]=${encodedSearchQuery}&filters[$or][3][altthumbnail][$contains]=${encodedSearchQuery}&filters[$or][4][descriptions][$contains]=${encodedSearchQuery}`);
+    `/api/posts?populate=*&filters[$or][0][title][$contains]=${encodedSearchQuery}&filters[$or][1][slug][$contains]=${encodedSearchQuery}&filters[$or][2][content][$contains]=${encodedSearchQuery}&filters[$or][3][altthumbnail][$contains]=${encodedSearchQuery}&filters[$or][4][descriptions][$contains]=${encodedSearchQuery}`);
   const jsonData = await res.json();
   console.log("data searchpage", jsonData)
   return jsonData;
@@ -287,4 +304,14 @@ export const fetchTagsData = async (): Promise<Props> => {
   const response = await fetch(process.env.NEXT_PUBLIC_STRAPI_URL + "/api/tags?");
   const data = await response.json();
   return data;
+};
+
+export const dataPagination2 = async (): Promise<Props> => {
+  const query = qs.stringify({
+    populate: ["tags", "thumbnail"],
+    sort: ['createdAt'],
+  },);
+  return fetch(process.env.NEXT_PUBLIC_STRAPI_URL +
+    `/api/posts?${query}`)
+    .then((res) => res.json());
 };

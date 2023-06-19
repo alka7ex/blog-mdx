@@ -12,34 +12,34 @@ export const Footer = () => {
             <div className="grow my-auto">
                 <span className="text-xl text-bold">Social</span>
                 <div className="flex flex-grow-1">
-                    <Link className='btn btn-ghost' href='https://www.linkedin.com/in/farhai/'>
+                    <a className='btn btn-ghost' href='https://www.linkedin.com/in/farhai/'>
                         <Image
                             src="/linkedin.svg"
                             width={20}
                             height={20}
                             alt="Linkedin" />
-                    </Link>
-                    <Link className='btn btn-ghost' href='https://www.instagram.com/alkafarh/'>
+                    </a>
+                    <a className='btn btn-ghost' href='https://www.instagram.com/alkafarh/'>
                         <Image
                             src="/instagram.svg"
                             width={20}
                             height={20}
                             alt="Instagram" />
-                    </Link>
-                    <Link className='btn btn-ghost' href='https://github.com/alka7ex'>
+                    </a>
+                    <a className='btn btn-ghost' href='https://github.com/alka7ex'>
                         <Image
                             src="/github.svg"
                             width={20}
                             height={20}
                             alt="Github" />
-                    </Link>
-                    <Link className='btn btn-ghost' href='mailto:farhienzahaikal@gmail.com'>
+                    </a>
+                    <a className='btn btn-ghost' href='mailto:farhienzahaikal@gmail.com'>
                         <Image
                             src="/mail.svg"
                             width={20}
                             height={20}
                             alt="Mail" />
-                    </Link>
+                    </a>
                 </div>
             </div>
         </footer>
