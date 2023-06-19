@@ -20,6 +20,7 @@ import { useEffect, useState } from "react";
 import PageButton from "@/components/PageButton";
 import { collapseTextChangeRangesAcrossMultipleVersions } from "typescript";
 import qs from "qs";
+import { Skeleton } from "./ui/skeleton";
 
 export interface Props {
     data: PropsDatum[];
@@ -164,8 +165,21 @@ const BlogList: React.FC<Props> = () => {
     })
 
     if (isLoading) {
-        return <div>Loading...</div>;
-    }
+        return <div className="h-auto w-auto mx-auto flex flex-col">
+          <div className="container grid grid-cols-1 md:grid-cols-2 space-x-10">
+            <div>
+              <Skeleton className="h-60 w-[300px] md:w-[350px] xl:w-[500px] my-4" />
+              <Skeleton className="h-4 w-[300px] md:w-[350px] xl:w-[500px] my-4" />
+              <Skeleton className="h-4 w-[300px] md:w-[350px] xl:w-[500px] my-4" />
+            </div>
+            <div className="invisible md:visible">
+              <Skeleton className="h-60 w-[300px] md:w-[350px] xl:w-[500px] my-4" />
+              <Skeleton className="h-4 w-[300px] md:w-[350px] xl:w-[500px] my-4" />
+              <Skeleton className="h-4 w-[300px] md:w-[350px] xl:w-[500px] my-4" />
+            </div>
+          </div>
+        </div>;
+      }
 
     if (isError) {
         return <div>Error: {error.message}</div>;
