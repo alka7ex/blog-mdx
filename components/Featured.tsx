@@ -140,7 +140,7 @@ const Featured: React.FC<Props> = async ({ }) => {
               <CardTitle className="m-6">
                 <div className="flex flex-row">
                   {datas.data.map((post) => (
-                    <div className="flex flex-row"> {/* Wrap the tags in a single div with flex layout */}
+                    <div className="flex flex-row" key={post.id}>
                       {post.attributes.tags.data.map((tag) => (
                         <div className="flex flex-col md:flex-row mx-max bg-transparent" key={tag.id}> {/* Use a single div for each tag */}
                           <a href={"/tags?q=" + tag.attributes.name_tag}>

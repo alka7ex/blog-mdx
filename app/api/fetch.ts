@@ -1,6 +1,5 @@
 import qs from 'qs';
 import { useSearchParams } from 'next/navigation'
-import { useState } from 'react';
 
 export interface Props {
   data: PropsDatum[];
@@ -108,20 +107,20 @@ export interface ResumeData {
 }
 
 export interface Datum {
-  id: number;
+  id:         number;
   attributes: Attributes;
 }
 
 export interface Attributes {
-  bio: string;
+  bio:        string;
   experience: string;
-  skills: string;
-  tools: string;
-  education: string;
-  course: string;
-  createdAt: Date;
-  updatedAt: Date;
-  summary: string;
+  skills:     string;
+  tools:      string;
+  education:  string;
+  course:     string;
+  createdAt:  Date;
+  updatedAt:  Date;
+  summary:    string;
 }
 
 export interface Meta {
@@ -129,15 +128,10 @@ export interface Meta {
 }
 
 export interface Pagination {
-  page: number;
-  pageSize: number;
+  page:      number;
+  pageSize:  number;
   pageCount: number;
-  total: number;
-}
-
-export interface PropsPage {
-  page: number;
-  pageSize: number;
+  total:     number;
 }
 
 
@@ -259,28 +253,22 @@ export async function normalSearchdata2(): Promise<Props> {
     },
   },
   );
-
-  const res = await fetch(process.env.NEXT_PUBLIC_STRAPI_URL + `/api/posts?${query}`);
   const jsonData = await res.json();
-  console.log("data searchpage", jsonData)
   return jsonData;
 }
 
-
 // PAGINATION BLOCK
-export async function dataPagination(): Promise<PropsPage> {
-  const pageNumber = 1;
-  const pageSize = 6;
+export async function dataPagination(): Promise<Props> {
+  const pageSize = 3
+  const pageNumber = 1
   const res = await fetch(
     process.env.NEXT_PUBLIC_STRAPI_URL +
-    "/api/posts?populate=*&pagination[page]=" + pageNumber + "&pagination[pageSize]=" + pageSize + "&sort=createdAt:desc"
+    "/api/posts?populate=*&pagination[page]="+{pageNumber}+"&pagination[pageSize]="+{pageSize}+"&sort=createdAt:desc"
   );
   const jsonData = await res.json();
-  console.log("API Response in fetch.ts", jsonData);
-  return { page: pageNumber, ...jsonData } as PropsPage;
+  console.log("jsonData", jsonData);
+  return jsonData;
 }
-
-
 
 export async function dataBlog(slug: string): Promise<Props> {
   const res = await fetch(
@@ -289,7 +277,7 @@ export async function dataBlog(slug: string): Promise<Props> {
     slug
   );
 
-
+  
   const jsonData = await res.json();
   return jsonData;
 }
