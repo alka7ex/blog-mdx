@@ -1,4 +1,5 @@
-import Providers from './utils/Providers';
+import Featured from '@/components/Featured'
+import BlogList from '@/components/BlogList'
 
 export interface Props {
   data: PropsDatum[];
@@ -79,11 +80,11 @@ export interface Pagination {
   total: number;
 }
 
-const page = async ({ data, meta }: Props) => {
+const page = async ({ data,meta }: Props) => {
   return (
     <div className='flex flex-col w-auto mx-0 mt-5 space-y-5'>
-      <Providers>
-      </Providers>
+      <Featured data={data} meta={meta}></Featured>
+      <BlogList data={data} meta={meta}></BlogList>
     </div>
   )
 };

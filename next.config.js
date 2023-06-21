@@ -1,9 +1,17 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {}
+const nextConfig = {
+
+}
+
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+  enabled: process.env.ANALYZE === 'true',
+})
+
+module.exports = withBundleAnalyzer({})
 
 /** module.exports = nextConfig */
 
-module.exports = {
+module.exports = withBundleAnalyzer({
   typescript: {
     // !! WARN !!
     // Dangerously allow production builds to successfully complete even if
@@ -28,4 +36,5 @@ module.exports = {
       },
     ],
   },
-};
+})
+

@@ -1,9 +1,10 @@
 import './globals.css'
 import { Inter } from 'next/font/google'
-import { Navbar } from '../components/Navbar'
+import {Navbar}  from '../components/Navbar'
 import { Footer } from '../components/Footer'
 import Script from 'next/script'
 import { ReactNode } from "react";
+import { useQueryClient } from '@tanstack/react-query'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -25,7 +26,7 @@ export const metadata = {
 export default function RootLayout({ children }: {children: ReactNode}) {
   return (
     <html lang="en">
-      <body className='mx-0'>
+      <body className=''>
         <section><Navbar /></section>
         <section className='md:mx-10 lg:mx-15 xl:mx-20'>{children}</section>
         <section><Footer /></section>
