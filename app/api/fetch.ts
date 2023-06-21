@@ -242,14 +242,14 @@ export async function normalSearchdata2(): Promise<Props> {
 
 // PAGINATION BLOCK
 export async function dataPagination(): Promise<Props> {
-  const pageSize = 3
+  const pageSize = 6
   const pageNumber = 1
   const res = await fetch(
     process.env.NEXT_PUBLIC_STRAPI_URL +
-    "/api/posts?populate=*&pagination[page]="+{pageNumber}+"&pagination[pageSize]="+{pageSize}+"&sort=createdAt:desc"
+    `/api/posts?populate=*&pagination[page]=${pageNumber}&pagination[pageSize]=${pageSize}&sort=createdAt:desc`
   );
   const jsonData = await res.json();
-  console.log("jsonData", jsonData);
+  console.log("datapagination", jsonData);
   return jsonData;
 }
 
