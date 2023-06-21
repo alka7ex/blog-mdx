@@ -1,6 +1,5 @@
 import Featured from '@/components/Featured'
 import BlogList from '@/components/BlogList'
-import Providers from './utils/Providers';
 
 export interface Props {
   data: PropsDatum[];
@@ -84,7 +83,8 @@ export interface Pagination {
 const page = async ({ data,meta }: Props) => {
   return (
     <div className='flex flex-col w-auto mx-0 mt-5 space-y-5'>
-      <Providers></Providers>
+      <Featured data={data} meta={meta}></Featured>
+      <BlogList data={data} meta={meta}></BlogList>
     </div>
   )
 };

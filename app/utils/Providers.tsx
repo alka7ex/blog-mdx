@@ -2,7 +2,6 @@
 
 import BlogListWithPagination from '@/components/BlogList'
 import Featured from '@/components/Featured'
-import HydratedPosts from '@/components/HydratedBlogList';
 import HydratedBlogList from '@/components/HydratedBlogList';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
@@ -95,7 +94,7 @@ const Providers = async ({ data,meta }) => {
     return (
         <QueryClientProvider client={queryClient}>
             <Featured data={data} meta={meta}></Featured>
-            <HydratedPosts></HydratedPosts>
+            <HydratedBlogList></HydratedBlogList>
             <ReactQueryDevtools initialIsOpen={false} />
         </QueryClientProvider>
     )

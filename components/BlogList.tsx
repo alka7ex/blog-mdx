@@ -120,11 +120,14 @@ export interface Attributes {
 }
 
 
+const queryClient = new QueryClient()
+
 
 const BlogList: React.FC<Props> = () => {
   const [page, setPage] = useState(1);
   const pageSize = 6;
   const fetchProjects = () => {
+    // Function body
     return fetch(process.env.NEXT_PUBLIC_STRAPI_URL +
       `/api/posts?populate=*&pagination[page]=${page}&pagination[pageSize]=${pageSize}&sort=createdAt:desc`)
       .then((res) => res.json());
@@ -221,4 +224,11 @@ const BlogList: React.FC<Props> = () => {
   );
 };
 
-export default BlogList;
+const BlogListWithPagination = () => (
+  <QueryClientProvider client={queryClient}>
+    <BlogList />
+    <ReactQueryDevtools initialIsOpen={false} />
+  </QueryClientProvider>
+);
+
+export default BlogListWithPagination;
