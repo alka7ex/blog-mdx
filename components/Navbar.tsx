@@ -8,13 +8,13 @@ export const Navbar = () => {
   return (
     <nav className="container h-20 w-auto flex flex-wrap bg-transparent">
       <div className="my-auto">
-        <a href='/' className="text-2xl text-bold">
+        <Link href='/' className="text-2xl text-bold">
           <Image
           src="/favicon.ico" 
           width={52} 
           height={52} 
           alt="logo" />
-        </a>
+        </Link>
       </div>
       <div className="grow">
       </div>
@@ -22,9 +22,9 @@ export const Navbar = () => {
         <Search></Search>
       </div>
       <div className="my-auto">
-        <a href='/resume' className="h-2">
+        <Link href='/resume' className="h-2">
           <Button variant="link" className="text-lg text-bold">Resume</Button>
-        </a>
+        </Link>
       </div>
     </nav>
   )
