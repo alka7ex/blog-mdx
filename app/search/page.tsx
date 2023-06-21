@@ -4,7 +4,7 @@ import TagSearch from '@/components/TagSearch'
 
 const page = () => {
   return (
-    <div className='min-h-screen'><Searchpage/><TagSearch></TagSearch></div>
+    <div className='min-h-screen'><Searchpage/></div>
   )
 }
 
