@@ -18,7 +18,7 @@ export const Search = () => {
             <div className="">
                 <Input
                     type="text"
-                    placeholder="Search article"
+                    placeholder="Search"
                     value={searchQuery}
                     onChange={(event) => setSearchQuery(event.target.value)}
                 >
