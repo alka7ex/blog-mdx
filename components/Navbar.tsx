@@ -9,7 +9,7 @@ export const Navbar = () => {
     <nav className="container h-20 w-auto flex flex-wrap bg-transparent">
       <div className="my-auto">
         <Link href='/' className="text-2xl text-bold">
-          <Image 
+          <Image
           src="/favicon.ico" 
           width={52} 
           height={52} 

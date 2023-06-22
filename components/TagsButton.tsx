@@ -54,7 +54,7 @@ export const TagsButton = () => {
     return (
         <Button
             onClick={() => handleClick(data[0].attributes.tags.name_tag)}
-            variant="ghost"
+            variant="link"
         >
             {data[0].attributes.tags.name_tag}
         </Button>

@@ -18,28 +18,28 @@ export const Footer = () => {
                             width={24}
                             height={24}
                             alt="Linkedin" />
-                    </Link>
-                    <Link className='btn btn-ghost' href='https://www.instagram.com/alkafarh/'>
+                    </a>
+                    <a className='btn btn-ghost' href='https://www.instagram.com/alkafarh/'>
                         <Image
                             src="/instagram.svg"
                             width={24}
                             height={24}
                             alt="Instagram" />
-                    </Link>
-                    <Link className='btn btn-ghost' href='https://github.com/alka7ex'>
+                    </a>
+                    <a className='btn btn-ghost' href='https://github.com/alka7ex'>
                         <Image
                             src="/github.svg"
                             width={24}
                             height={24}
                             alt="Github" />
-                    </Link>
-                    <Link className='btn btn-ghost' href='mailto:farhienzahaikal@gmail.com'>
+                    </a>
+                    <a className='btn btn-ghost' href='mailto:farhienzahaikal@gmail.com'>
                         <Image
                             src="/mail.svg"
                             width={24}
                             height={24}
                             alt="Mail" />
-                    </Link>
+                    </a>
                 </div>
             </div>
         </footer>
