@@ -11,17 +11,7 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import { Button } from "@/components/ui/button";
-import { dataBloglist } from "@/app/api/fetch";
-import { dataPagination } from "@/app/api/fetch";
-import { QueryClient, QueryClientProvider, useQuery, dehydrate, Hydrate } from '@tanstack/react-query';
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
-import { useSearchParams } from "next/navigation";
-import { useState } from "react";
-import PageButton from "@/components/PageButton";
-import { collapseTextChangeRangesAcrossMultipleVersions } from "typescript";
-import { Skeleton } from "./ui/skeleton";
 import { allBlogs } from "@/.contentlayer/generated";
-import Blog from "./Blog";
 
 export interface Props {
   params: {
@@ -35,7 +25,6 @@ export interface Props {
       type: string;
       content: string;
       thumbnail: string;
-      // Blog: string;  
       data?: any;
       meta?: any;
     }
@@ -50,17 +39,19 @@ const BlogList: React.FC<Props> = () => {
       <div className="h-auto w-auto mx-auto flex flex-col">
         <div className="container grid grid-cols-1 mx-auto space-y-5 md:grid-cols-2 lg:space-y-0">
           {allBlogs.map((post) => (
-            <div className="flex flex-col">
-              <CardHeader>
-                <Link href={"/blog/" + post.slug} className="container rounded-2xl justify-center">
-                  <Image
-                    src={post.thumbnail}
-                    width={400}
-                    height={300}
-                    alt="Picture of the author"
-                    className=""
-                  />
-                </Link>
+            <div className="flex flex-col xl:mx-10">
+              <CardHeader className="">
+                <div className="container h-60 w-90 relative rounded-2xl">
+                  <Link href={"/blog/" + post.slug} className="container">
+                    <Image
+                      src={post.thumbnail}
+                      alt={post.altthumbnail}
+                      className="rounded-2xl object-cover"
+                      fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      />
+                  </Link>
+                </div>
               </CardHeader>
               <CardTitle className="m-6">
                 <Link href={"/blog/" + post.slug}>
