@@ -33,7 +33,7 @@ export const Blog = defineDocumentType(() => ({
             type: 'string',
             required: true
         },
-        description: {
+        descriptions: {
             type: 'string',
             required: true
         },
@@ -43,10 +43,6 @@ export const Blog = defineDocumentType(() => ({
             required: true
         },
         date: {
-            type: 'string',
-            required: true
-        },
-        content: {
             type: 'string',
             required: true
         },

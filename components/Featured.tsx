@@ -58,19 +58,18 @@ export const getBlogFromParams = () => {
 const Featured: React.FC<Props> = () => {
   const blogs = getBlogFromParams();
   return (
-    <div className="">
+    <div className="mx-auto">
       <div className="container grid w-auto h-auto grid-cols-1 p-5 mx-auto space-y-5 md:grid-cols-2 md:space-y-0 md:space-x-5">
         {blogs.map((blog) => (
           <div key={blog.slug} className="flex min-h-full m-auto rounded-2xl">
             <div className="m-auto">
-              <Link href={"/blog/" + blog.slug}>
+              <Link href={"/blog/" + blog.slug} className="container rounded-2xl justify-center">
                 <Image
                   src={blog.thumbnail}
                   width={600}
                   height={400}
                   alt="Picture of the author"
-                  className="rounded-2xl"
-                />
+                  />
               </Link>
             </div>
           </div>
@@ -96,7 +95,7 @@ const Featured: React.FC<Props> = () => {
                   </div>
                 </CardTitle>
                 <CardContent className="">
-                  <p className="h-24 overflow-hidden">{blog.description}</p>
+                  <p className="h-24 overflow-hidden">{blog.descriptions}</p>
                 </CardContent>
               </div>
             </div>

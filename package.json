@@ -3,11 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
+    "dev": "contentlayer build && next dev",
+    "build": "contentlayer build && next build",
     "start": "next start",
     "lint": "next lint",
-    "clean": "rm -rf .next"
+    "clean": "rm -rf .next",
+    "publish": "contentlayer build && next build && next start"
   },
   "dependencies": {
     "@mdx-js/loader": "^2.3.0",

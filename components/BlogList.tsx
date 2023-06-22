@@ -33,7 +33,7 @@ export interface Props {
       date: string;
       featured: boolean;
       type: string;
-      content : string;
+      content: string;
       thumbnail: string;
       // Blog: string;  
       data?: any;
@@ -41,6 +41,8 @@ export interface Props {
     }
   }
 }
+
+export const PageSize = 10;
 
 const BlogList: React.FC<Props> = () => {
   return (
@@ -50,13 +52,13 @@ const BlogList: React.FC<Props> = () => {
           {allBlogs.map((post) => (
             <div className="flex flex-col">
               <CardHeader>
-                <Link href={"/blog/" + post.slug}>
+                <Link href={"/blog/" + post.slug} className="container rounded-2xl justify-center">
                   <Image
                     src={post.thumbnail}
                     width={400}
                     height={300}
                     alt="Picture of the author"
-                    className="rounded-2xl"
+                    className=""
                   />
                 </Link>
               </CardHeader>
@@ -77,12 +79,12 @@ const BlogList: React.FC<Props> = () => {
                 </div>
               </CardTitle>
               <CardContent className="">
-                <div className="h-24 overflow-hidden">{post.description}</div>
+                <div className="h-24 overflow-hidden">{post.descriptions}</div>
               </CardContent>
             </div>
           ))}
         </div>
-        
+
       </div>
     </div>
   );
