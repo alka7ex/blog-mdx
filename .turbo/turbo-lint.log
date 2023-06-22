@@ -1,20 +1,27 @@
-
-> blog-haikal@0.1.0 lint
-> next lint
-
-- info Loaded env from /home/haikal/project-blog/blog-haikal/.env
+yarn run v1.22.19
+$ next lint
+- info Loaded env from /home/haikal/p/f/next/project-blog/blog-mdx/.env
 
 ./app/api/fetch.ts
-179:18  Error: React Hook "useSearchParams" is called in function "tagSearchdata" that is neither a React function component nor a custom React Hook function. React component names must start with an uppercase letter. React Hook names must start with the word "use".  react-hooks/rules-of-hooks
-197:18  Error: React Hook "useSearchParams" is called in function "normalSearchdata" that is neither a React function component nor a custom React Hook function. React component names must start with an uppercase letter. React Hook names must start with the word "use".  react-hooks/rules-of-hooks
+173:18  Error: React Hook "useSearchParams" is called in function "tagSearchdata" that is neither a React function component nor a custom React Hook function. React component names must start with an uppercase letter. React Hook names must start with the word "use".  react-hooks/rules-of-hooks
+191:18  Error: React Hook "useSearchParams" is called in function "normalSearchdata" that is neither a React function component nor a custom React Hook function. React component names must start with an uppercase letter. React Hook names must start with the word "use".  react-hooks/rules-of-hooks
+203:18  Error: React Hook "useSearchParams" is called in function "normalSearchdata2" that is neither a React function component nor a custom React Hook function. React component names must start with an uppercase letter. React Hook names must start with the word "use".  react-hooks/rules-of-hooks
+
+./components/BlogList.tsx
+42:13  Error: Missing "key" prop for element in iterator  react/jsx-key
+62:21  Error: Missing "key" prop for element in iterator  react/jsx-key
 
 ./components/Featured.tsx
-143:21  Error: Missing "key" prop for element in iterator  react/jsx-key
+86:23  Error: Missing "key" prop for element in iterator  react/jsx-key
 
 ./components/Searchpage.tsx
-105:21  Error: Missing "key" prop for element in iterator  react/jsx-key
+70:25  Error: Missing "key" prop for element in iterator  react/jsx-key
+90:41  Error: Missing "key" prop for element in iterator  react/jsx-key
 
 ./components/TagSearch.tsx
-125:21  Error: Missing "key" prop for element in iterator  react/jsx-key
+57:25  Error: Missing "key" prop for element in iterator  react/jsx-key
+77:41  Error: Missing "key" prop for element in iterator  react/jsx-key
 
 info  - Need to disable some ESLint rules? Learn more here: https://nextjs.org/docs/basic-features/eslint#disabling-rules
+error Command failed with exit code 1.
+info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.
