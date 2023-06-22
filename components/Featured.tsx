@@ -6,10 +6,8 @@ import {
 } from "@/components/ui/card"
 import { Button } from "@/components/ui/button";
 import React from "react";
-import { Props, dataFeatured } from "@/app/api/fetch";
 import { allBlogs } from "@/.contentlayer/generated";
-import { notFound, useRouter } from "next/navigation";
-import Blog from "./Blog";
+import { notFound } from "next/navigation";
 
 export interface Props {
   params: {
@@ -61,15 +59,16 @@ const Featured: React.FC<Props> = () => {
     <div className="mx-auto">
       <div className="container grid w-auto h-auto grid-cols-1 p-5 mx-auto space-y-5 md:grid-cols-2 md:space-y-0 md:space-x-5">
         {blogs.map((blog) => (
-          <div key={blog.slug} className="flex min-h-full m-auto rounded-2xl">
-            <div className="m-auto">
-              <Link href={"/blog/" + blog.slug} className="container rounded-2xl justify-center">
+          <div key={blog.slug} className="container m-auto rounded-2xl">
+            <div className="container h-60 md:h-72 xl:h-96 relative rounded-2xl">
+              <Link href={"/blog/" + blog.slug} className="">
                 <Image
                   src={blog.thumbnail}
-                  width={600}
-                  height={400}
-                  alt="Picture of the author"
-                  />
+                  alt={blog.altthumbnail}
+                  className="rounded-2xl object-cover"
+                  fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  priority/>
               </Link>
             </div>
           </div>

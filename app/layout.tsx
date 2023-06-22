@@ -30,14 +30,14 @@ export default function RootLayout({ children }: {children: ReactNode}) {
         <section><Navbar /></section>
         <section className='md:mx-10 lg:mx-15 xl:mx-20'>{children}</section>
         <section><Footer /></section>
-        <Script strategy="lazyOnload" src='https://www.googletagmanager.com/gtag/js?id=G-K9JFYBBM5Z'
+        {/* <Script strategy="lazyOnload" src='https://www.googletagmanager.com/gtag/js?id=G-K9JFYBBM5Z'
         />
         <Script id='google-analyics-script' strategy="lazyOnload">
           {`window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments)};
           gtag('js', new Date());
            gtag('config', 'G-K9JFYBBM5Z');`}
-        </Script>
+        </Script> */}
       </body>
     </html>
   )

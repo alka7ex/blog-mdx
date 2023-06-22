@@ -43,7 +43,7 @@ const TagSearch: React.FC<Props> = () => {
     const filteredBlogs = allBlogs.filter((post) => {
         // Implement your filtering logic based on the search query
         // For example, check if the title or tags contain the search query
-        const {tags } = post;
+        const { tags } = post;
         return (
             tags.some((tag) => tag.toLowerCase().includes(encodedSearchQuery))
         );
@@ -56,14 +56,17 @@ const TagSearch: React.FC<Props> = () => {
                     {filteredBlogs.map((post) => (
                         <div className="flex flex-col">
                             <CardHeader>
-                                <Link href={"/blog/" + post.slug}className="container rounded-2xl justify-center">
-                                    <Image
-                                        src={post.thumbnail}
-                                        width={400}
-                                        height={300}
-                                        alt="Picture of the author"
+                                <div className="container h-60 w-90 relative rounded-2xl">
+                                    <Link href={"/blog/" + post.slug} className="container">
+                                        <Image
+                                            src={post.thumbnail}
+                                            alt={post.altthumbnail}
+                                            className="rounded-2xl object-cover"
+                                            fill
+                                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                                         />
-                                </Link>
+                                    </Link>
+                                </div>
                             </CardHeader>
                             <CardTitle className="m-6">
                                 <Link href={"/blog/" + post.slug}>
