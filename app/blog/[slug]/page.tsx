@@ -69,8 +69,8 @@ export const page = async ({ params }: Props) => {
           </Link>
         </div>
       </div>
-      <div className="container max-w-none prose justify-center">
-        <div className="max-w-[600px] container relative rounded-2xl">
+      <div className="container max-w-none justify-center">
+        <div className="max-w-[600px] container relative rounded-2xl h-auto mb-20">
           <AspectRatio ratio={4 / 3}>
             <Image
               className="rounded-2xl object-cover"
@@ -81,8 +81,8 @@ export const page = async ({ params }: Props) => {
             />
           </AspectRatio>
         </div>
-        <div className="container max-w-[800px]">
-          <h1 className="prose prose-h1:">{blog.title}</h1>
+        <div className="container prose max-w-[800px] text-foreground">
+          <h1 className="text-foreground">{blog.title}</h1>
           <Mdx code={blog.body.code} />
         </div>
       </div>
@@ -90,20 +90,6 @@ export const page = async ({ params }: Props) => {
   )
 }
 export default page;
-
-
-// export async function generateMetadata({ params: { slug }}: Props) {
-//   const blog = await getBlogFromParams(params.slug)
-//   return {
-//     title: meta.data[0].attributes.title,
-//     description: meta.data[0].attributes.description,
-//   };
-// }
-
-// const blog = ({ params: { slug,data,meta }}: Props) => {
-//   return <Blog slug={slug} data={data} meta={meta}></Blog>;
-// };
-
 
 export const generateMetadata = async ({ params }: Props) => {
   const blog = await getBlogFromParams(params.slug)
