@@ -67,7 +67,7 @@ const Search: React.FC<Props> = () => {
             <div className="h-auto w-auto mx-auto flex flex-col">
                 <div className="container grid grid-cols-1 mx-auto space-y-5 md:grid-cols-2 lg:space-y-0">
                     {filteredBlogs.map((post) => (
-                        <div className="flex flex-col">
+                        <div className="flex flex-col xl:mx-10">
                             <CardHeader>
                                 <div className="container h-60 w-90 relative rounded-2xl">
                                     <Link href={"/blog/" + post.slug} className="container">
