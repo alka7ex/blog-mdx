@@ -13,7 +13,7 @@ export type Blog = {
   _id: string
   _raw: Local.RawDocumentData
   type: 'Blog'
-  title: string
+  title?: string | undefined
   thumbnail: string
   slug: string
   descriptions: string
@@ -33,11 +33,6 @@ export type Resume = {
   type: 'Resume'
   bio: string
   summary: string
-  skills: string
-  tools: string
-  education: string
-  experience: string
-  course: boolean
   /** MDX file body */
   body: MDX
 

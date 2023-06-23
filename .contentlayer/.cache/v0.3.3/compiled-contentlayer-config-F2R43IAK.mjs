@@ -1,16 +1,18 @@
 // contentlayer.config.js
-import { notEqual } from "assert";
 import { defineDocumentType, makeSource } from "contentlayer/source-files";
-import rehypeAutolinkHeadings from "rehype-autolink-headings/lib";
+import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypePrettyCode from "rehype-pretty-code";
 import rehypeSlug from "rehype-slug";
 import remarkGfm from "remark-gfm";
-var Doc = defineDocumentType(() => ({
-  name: "doc",
-  filePathPattern: `complete-nextjs/**/*.mdx`,
+var Blog = defineDocumentType(() => ({
+  name: "Blog",
+  filePathPattern: `/app/api/content/blog/**/*.mdx`,
   contentType: "mdx",
   fields: {
     title: {
+      type: "string"
+    },
+    thumbnail: {
       type: "string",
       required: true
     },
@@ -18,19 +20,16 @@ var Doc = defineDocumentType(() => ({
       type: "string",
       required: true
     },
-    description: {
+    descriptions: {
       type: "string",
       required: true
     },
     tags: {
-      type: "string",
+      type: "list",
+      of: { type: "string" },
       required: true
     },
     date: {
-      type: "string",
-      required: true
-    },
-    content: {
       type: "string",
       required: true
     },
@@ -44,18 +43,53 @@ var Doc = defineDocumentType(() => ({
     }
   }
 }));
-var contentlayer_config_default = makeSoure({
-  contentDirPath: "content/blog",
-  documentType: [Doc],
+var Resume = defineDocumentType(() => ({
+  name: "Resume",
+  filePathPattern: `/app/api/content/resume/**/*.mdx`,
+  contentType: "mdx",
+  fields: {
+    bio: {
+      type: "string",
+      required: true
+    },
+    summary: {
+      type: "string",
+      required: true
+    }
+    // skills: {
+    //     type: 'string',
+    //     required: true
+    // },
+    // tools: {
+    //     type: 'string',
+    //     required: true
+    // },
+    // education: {
+    //     type: 'string',
+    //     required: true
+    // },
+    // experience: {
+    //     type: 'string',
+    //     required: true
+    // },
+    // course: {
+    //     type: 'boolean',
+    //     required: true
+    // },
+  }
+}));
+var contentlayer_config_default = makeSource({
+  contentDirPath: "./app/api/content",
+  documentTypes: [Blog, Resume],
   mdx: {
     remarkPlugins: [remarkGfm],
-    remarkPlugins: [
+    rehypePlugins: [
       rehypeSlug,
       [
-        rehypeAutolinkHeadings,
+        rehypePrettyCode,
         {
           theme: "github-dark",
-          onVisitLine: (node) => {
+          onVisitLine(node) {
             if (node.children.length === 0) {
               node.children = [{ type: "text", value: " " }];
             }
@@ -64,7 +98,7 @@ var contentlayer_config_default = makeSoure({
             node.properties.className.push("line--highlighted");
           },
           onVisitHighlightedWord(node) {
-            node.properties.className.push("word--highlighted");
+            node.properties.className = ["word--highlighted"];
           }
         }
       ],
@@ -81,7 +115,8 @@ var contentlayer_config_default = makeSoure({
   }
 });
 export {
-  Doc,
+  Blog,
+  Resume,
   contentlayer_config_default as default
 };
-//# sourceMappingURL=compiled-contentlayer-config-AUPCTYSV.mjs.map
+//# sourceMappingURL=compiled-contentlayer-config-F2R43IAK.mjs.map

@@ -3,9 +3,9 @@ import Link from "next/link";
 
 export const Footer = () => {
     return (
-        <footer className="rounded-lg shadow dark:bg-gray-900 mt-4 pb-10 flex flex-grow">
+        <footer className="shadow mt-4 pb-10 flex flex-grow">
             <div className="container my-auto relative">
-                <div className="container flex-grow gap-4 relative justify-center">
+                <div className="container flex flex-row flex-grow space-x-10 relative justify-center">
                     <a className='btn btn-ghost' href='https://www.linkedin.com/in/farhai/'>
                         <Image
                             src="/linkedin.svg"

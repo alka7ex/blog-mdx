@@ -3,8 +3,6 @@ $ contentlayer build && next build
 Generated 10 documents in .contentlayer
 - info Loaded env from /home/haikal/p/f/next/project-blog/blog-mdx/.env
 - info Creating an optimized production build...
-Warning: For production Image Optimization with Next.js, the optional 'sharp' package is strongly recommended. Run 'yarn add sharp', and Next.js will use it automatically for Image Optimization.
-Read more: https://nextjs.org/docs/messages/sharp-missing-in-production
 
 [35m🌼 daisyUI 3.1.5[0m [0mhttps://daisyui.com
 ╰╮
@@ -30,7 +28,7 @@ Route (app)                                Size     First Load JS
 ┌ ○ /                                      0 B                0 B
 ├ λ /blog/[slug]                           2.51 kB        90.5 kB
 ├ ○ /favicon.ico                           0 B                0 B
-├ ○ /resume                                629 B          82.9 kB
+├ ○ /resume                                634 B          82.9 kB
 ├ ○ /robots.txt                            0 B                0 B
 ├ ○ /search                                859 B           115 kB
 ├ ○ /sitemap.xml                           0 B                0 B
@@ -40,7 +38,7 @@ Route (app)                                Size     First Load JS
   ├ chunks/962-d7f97a9983fd6c63.js         4.71 kB
   ├ chunks/bce60fc1-28549db9875ad5b7.js    50.5 kB
   ├ chunks/main-app-1087043425344741.js    217 B
-  └ chunks/webpack-10e31953b88374cc.js     1.67 kB
+  └ chunks/webpack-582417ec5ab436aa.js     1.68 kB
 
 Route (pages)                              Size     First Load JS
 ─ ○ /404                                   182 B          74.8 kB
@@ -48,9 +46,9 @@ Route (pages)                              Size     First Load JS
   ├ chunks/framework-8883d1e9be70c3da.js   45 kB
   ├ chunks/main-ff630ef38fb2d032.js        27.7 kB
   ├ chunks/pages/_app-998b8fceeadee23e.js  195 B
-  └ chunks/webpack-10e31953b88374cc.js     1.67 kB
+  └ chunks/webpack-582417ec5ab436aa.js     1.68 kB
 
 λ  (Server)  server-side renders at runtime (uses getInitialProps or getServerSideProps)
 ○  (Static)  automatically rendered as static HTML (uses no initial props)
 
-Done in 25.20s.
+Done in 21.45s.
