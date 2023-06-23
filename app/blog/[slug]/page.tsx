@@ -1,7 +1,7 @@
 import Image from "next/image";
 // import Blog from "@/components/Blog";
 import qs from 'qs';
-import allDocs, { Blog, allBlogs } from "contentlayer/generated";
+import allDocs, { allBlogs } from "contentlayer/generated";
 
 export interface Props {
   params: {

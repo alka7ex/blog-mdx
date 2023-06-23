@@ -1,6 +1,56 @@
-
-> blog-haikal@0.1.0 build
-> next build
-
-- info Loaded env from /home/haikal/project-blog/blog-haikal/.env
+yarn run v1.22.19
+$ contentlayer build && next build
+Generated 10 documents in .contentlayer
+- info Loaded env from /home/haikal/p/f/next/project-blog/blog-mdx/.env
 - info Creating an optimized production build...
+Warning: For production Image Optimization with Next.js, the optional 'sharp' package is strongly recommended. Run 'yarn add sharp', and Next.js will use it automatically for Image Optimization.
+Read more: https://nextjs.org/docs/messages/sharp-missing-in-production
+
+[35m🌼 daisyUI 3.1.5[0m [0mhttps://daisyui.com
+╰╮
+ ╰─ [32m✔︎[0m [2m[ [0m2[2m ][0m themes are enabled. You can add more themes or make your own theme:
+      https://daisyui.com/docs/themes
+
+[32m    ❤︎ Support daisyUI[0m: https://opencollective.com/daisyui[0m
+
+- info Compiled successfully
+- info Skipping validation of types
+- info Skipping linting
+- info Collecting page data...
+- info Generating static pages (0/9)
+- info Generating static pages (2/9)
+- info Generating static pages (4/9)
+- warn Entire page /tags deopted into client-side rendering. https://nextjs.org/docs/messages/deopted-into-client-rendering /tags
+- info Generating static pages (6/9)
+- warn Entire page /search deopted into client-side rendering. https://nextjs.org/docs/messages/deopted-into-client-rendering /search
+- info Generating static pages (9/9)
+- info Finalizing page optimization...
+
+Route (app)                                Size     First Load JS
+┌ ○ /                                      0 B                0 B
+├ λ /blog/[slug]                           2.51 kB        90.5 kB
+├ ○ /favicon.ico                           0 B                0 B
+├ ○ /resume                                629 B          82.9 kB
+├ ○ /robots.txt                            0 B                0 B
+├ ○ /search                                859 B           115 kB
+├ ○ /sitemap.xml                           0 B                0 B
+└ ○ /tags                                  797 B           115 kB
++ First Load JS shared by all              82.3 kB
+  ├ chunks/769-daa5c6ce69b88052.js         25.2 kB
+  ├ chunks/962-d7f97a9983fd6c63.js         4.71 kB
+  ├ chunks/bce60fc1-28549db9875ad5b7.js    50.5 kB
+  ├ chunks/main-app-1087043425344741.js    217 B
+  └ chunks/webpack-10e31953b88374cc.js     1.67 kB
+
+Route (pages)                              Size     First Load JS
+─ ○ /404                                   182 B          74.8 kB
++ First Load JS shared by all              74.6 kB
+  ├ chunks/framework-8883d1e9be70c3da.js   45 kB
+  ├ chunks/main-ff630ef38fb2d032.js        27.7 kB
+  ├ chunks/pages/_app-998b8fceeadee23e.js  195 B
+  └ chunks/webpack-10e31953b88374cc.js     1.67 kB
+
+λ  (Server)  server-side renders at runtime (uses getInitialProps or getServerSideProps)
+○  (Static)  automatically rendered as static HTML (uses no initial props)
+
+Done in 25.20s.

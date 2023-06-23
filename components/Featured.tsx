@@ -68,7 +68,7 @@ const Featured: React.FC<Props> = () => {
                   className="rounded-2xl object-cover"
                   fill
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  priority/>
+                  priority />
               </Link>
             </div>
           </div>
@@ -79,7 +79,9 @@ const Featured: React.FC<Props> = () => {
               <div className="flex flex-col">
                 <CardTitle className="m-6">
                   <Link href={"/blog/" + blog.slug}>
-                    {blog.title}
+                    <h1>
+                      {blog.title}
+                    </h1>
                   </Link>
                   <div className="flex flex-row mt-3 space-x-2"> {/* Wrap the tags in a single div with flex layout */}
                     {blog.tags.map((tag) => (
