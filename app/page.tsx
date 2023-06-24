@@ -1,6 +1,7 @@
 import Featured from '@/components/Featured'
 import BlogList from '@/components/BlogList'
 
+
 export interface Props {
   data: PropsDatum[];
   meta: Meta;
@@ -79,6 +80,8 @@ export interface Pagination {
   pageCount: number;
   total: number;
 }
+
+export const runtime = 'edge'
 
 const page = async ({ data,meta }: Props) => {
   return (
