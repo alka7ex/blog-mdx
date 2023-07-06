@@ -1,22 +1,48 @@
 import { MetadataRoute } from 'next'
+import { allBlogs } from "contentlayer/generated";
+export interface Props {
+  params: {
+    title: string;
+    slug: string;
+    descriptions: string;
+    tags: string[];
+    date: string;
+    featured: boolean;
+    type: string;
+    content: string;
+    thumbnail: string;
+    Blog: string;
+    data?: any;
+    meta?: any;
+  };
+}
  
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap({ params }: Props) {
+  const baseUrl = 'https://farhienza-haikal.my.id'
+  const posts = await allBlogs;
+  const postsUrls = posts?.map((post) => {
+    return {
+      url: `${baseUrl}/blog/${post.slug}`,
+      lastModified: new Date(),
+    };
+  }) ?? [];
   return [
     {
-      url: 'https://farhienza-haikal.my.id',
+      url: baseUrl,
       lastModified: new Date(),
     },
     {
-      url: 'https://farhienza-haikal.my.id/resume',
+      url: `${baseUrl}/resume`,
       lastModified: new Date(),
     },
     {
-      url: 'https://farhienza-haikal.my.id/search?q=',
+      url: `${baseUrl}/search?q=`,
       lastModified: new Date(),
     },
     {
-      url: 'https://farhienza-haikal.my.id/tags?q=',
+      url: `${baseUrl}/tags?q=`,
       lastModified: new Date(),
     },
+    ...postsUrls,
   ]
 }
