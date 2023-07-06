@@ -73,27 +73,6 @@ export const Resume = defineDocumentType(() => ({
             type: 'string',
             required: true
         },
-        // skills: {
-        //     type: 'string',
-        //     required: true
-        // },
-        // tools: {
-        //     type: 'string',
-        //     required: true
-        // },
-        // education: {
-        //     type: 'string',
-        //     required: true
-        // },
-        // experience: {
-        //     type: 'string',
-        //     required: true
-        // },
-        // course: {
-        //     type: 'boolean',
-        //     required: true
-        // },
-
     }
 }))
 

@@ -85,9 +85,9 @@ const Featured: React.FC<Props> = () => {
                   </Link>
                   <div className="flex flex-row mt-3 space-x-2"> {/* Wrap the tags in a single div with flex layout */}
                     {blog.tags.map((tag) => (
-                      <div className="flex flex-col md:flex-row mx-max bg-transparent"> {/* Use a single div for each tag */}
+                      <div className="flex flex-col md:flex-row mx-max"> {/* Use a single div for each tag */}
                         <Link href={"/tags?q=" + tag}>
-                          <Button className="justify-start p-1 w-auto h-auto text-xs  bg-transparent">
+                          <Button className="justify-start p-1 w-auto h-auto text-xs bg-secondary text-secondary-foreground">
                             {tag}
                           </Button>
                         </Link>
