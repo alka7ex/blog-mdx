@@ -85,7 +85,7 @@ const TagSearch: React.FC<Props> = () => {
                                 </div>
                             </CardTitle>
                             <CardContent className="">
-                                <div className="h-24 overflow-hidden">{post.descriptions}</div>
+                                <div className="h-24 overflow-hidden">{post.description}</div>
                             </CardContent>
                         </div>
                     ))}

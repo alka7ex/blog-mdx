@@ -37,7 +37,7 @@ const BlogList: React.FC<Props> = () => {
       <div className="h-auto w-auto mx-auto flex flex-col">
         <div className="container grid grid-cols-1 mx-auto space-y-5 md:grid-cols-2 md:space-y-5">
           {allBlogs.map((post) => (
-            <div className="flex flex-col xl:mx-10 bg-secondary rounded-xl">
+            <Card className="flex flex-col xl:mx-10 rounded-xl">
               <CardHeader className="">
                 <div className="container h-60 w-90 relative rounded-2xl">
                   <Link href={"/blog/" + post.slug} className="container">
@@ -59,7 +59,7 @@ const BlogList: React.FC<Props> = () => {
                   {post.tags.map((tag) => (
                     <div className="flex flex-col md:flex-row mx-max"> {/* Use a single div for each tag */}
                       <Link href={"/tags?q=" + tag}>
-                        <Button className="justify-start p-1 w-auto h-auto text-xs bg-secondary text-secondary-foreground">
+                        <Button variant="link" className="justify-start p-1 w-auto h-auto text-xs bg-primary text-accent">
                           {tag}
                         </Button>
                       </Link>
@@ -68,9 +68,9 @@ const BlogList: React.FC<Props> = () => {
                 </div>
               </CardTitle>
               <CardContent className="">
-                <div className="h-24 overflow-hidden">{post.descriptions}</div>
+                <div className="h-24 overflow-hidden">{post.description}</div>
               </CardContent>
-            </div>
+            </Card>
           ))}
         </div>
 

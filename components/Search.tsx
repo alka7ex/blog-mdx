@@ -15,7 +15,7 @@ export const Search = () => {
     }
     return (
         <form onSubmit={onSearch}>
-            <div className="">
+            <div className="text-foreground">
                 <Input
                     type="text"
                     placeholder="Search"

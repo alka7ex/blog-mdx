@@ -32,7 +32,7 @@ export const Blog = defineDocumentType(() => ({
             type: 'string',
             required: true
         },
-        descriptions: {
+        description: {
             type: 'string',
             required: true
         },

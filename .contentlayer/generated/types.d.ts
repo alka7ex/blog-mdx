@@ -16,7 +16,7 @@ export type Blog = {
   title?: string | undefined
   thumbnail: string
   slug: string
-  descriptions: string
+  description: string
   tags: string[]
   date: string
   altthumbnail: string

@@ -28,7 +28,7 @@ export interface Props {
         Blog: {
             title: string;
             slug: string;
-            descriptions: string;
+            description: string;
             tags: string[];
             date: string;
             featured: boolean;
@@ -52,11 +52,11 @@ const Search: React.FC<Props> = () => {
     const encodedSearchQuery = (searchQuery || '');
     const filteredBlogs = allBlogs.filter((post) => {
         const lowerCaseSearchQuery = encodedSearchQuery.toLowerCase();
-        const { title, tags, body, descriptions, slug } = post;
+        const { title, tags, body, description, slug } = post;
         const bodyContent = body.code.toString();
         return (
             title.toLowerCase().includes(lowerCaseSearchQuery) ||
-            descriptions.toLowerCase().includes(lowerCaseSearchQuery) ||
+            description.toLowerCase().includes(lowerCaseSearchQuery) ||
             tags.some((tag) => tag.toLowerCase().includes(lowerCaseSearchQuery)) ||
             bodyContent.toLowerCase().includes(lowerCaseSearchQuery) ||
             slug.toLowerCase().includes(lowerCaseSearchQuery)
@@ -98,7 +98,7 @@ const Search: React.FC<Props> = () => {
                                 </div>
                             </CardTitle>
                             <CardContent className="">
-                                <div className="h-24 overflow-hidden">{post.descriptions}</div>
+                                <div className="h-24 overflow-hidden">{post.description}</div>
                             </CardContent>
                         </div>
                     ))}
