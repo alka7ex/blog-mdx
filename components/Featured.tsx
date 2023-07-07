@@ -87,7 +87,7 @@ const Featured: React.FC<Props> = () => {
                     {blog.tags.map((tag) => (
                       <div className="flex flex-col md:flex-row mx-max"> {/* Use a single div for each tag */}
                         <Link href={"/tags?q=" + tag}>
-                          <Button className="justify-start p-1 w-auto h-auto text-xs bg-secondary text-secondary-foreground">
+                          <Button variant="link" className="justify-start p-1 w-auto h-auto text-xs text-foreground">
                             {tag}
                           </Button>
                         </Link>
@@ -96,7 +96,7 @@ const Featured: React.FC<Props> = () => {
                   </div>
                 </CardTitle>
                 <CardContent className="">
-                  <p className="h-24 overflow-hidden">{blog.descriptions}</p>
+                  <p className="h-24 overflow-hidden">{blog.description}</p>
                 </CardContent>
               </div>
             </div>
