@@ -10,7 +10,7 @@ module.exports = {
   theme: {
     container: {
       center: true,
-      padding: "2rem",
+      padding: "0.5rem",
       screens: {
         "2xl": "1400px",
       },
@@ -50,6 +50,10 @@ module.exports = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        header: {
+          DEFAULT: "hsl(var(--header))",
+          foreground: "hsl(var(--header-foreground))",
+        }
       },
       borderRadius: {
         lg: "var(--radius)",

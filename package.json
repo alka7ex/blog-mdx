@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "contentlayer build && next dev",
     "build": "contentlayer build && next build",
-    "start": "next start",
+    "start": "contentlayer build && next build && next start",
     "lint": "next lint",
     "clean": "rm -rf .next",
     "publish": "contentlayer build && next build && next start"

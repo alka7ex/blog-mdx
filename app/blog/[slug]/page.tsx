@@ -40,7 +40,7 @@ export const page = async ({ params }: Props) => {
   const blog = await getBlogFromParams(params.slug)
   return (
     <div>
-      <div className="container flex flex-cols mt-8 mb-12 mx-8 xl:pl-24">
+      <div className="container flex flex-cols mt-8 mb-20 xl:pl-24 space-x-4 mx-4">
         <Link href="/resume">
           <div className="avatar">
             <div className="container relative w-24 h-24 my-auto">
@@ -55,7 +55,7 @@ export const page = async ({ params }: Props) => {
             </div>
           </div>
         </Link>
-        <div className="container flex-col mx-8 my-auto">
+        <div className="container flex-col mx-auto my-auto">
           <h4 className="text-sm font-bold my-2 md:text-md">
             {/* {datas.} */}
           </h4>
@@ -69,8 +69,8 @@ export const page = async ({ params }: Props) => {
           </Link>
         </div>
       </div>
-      <div className="container max-w-none justify-center">
-        <div className="max-w-[600px] container relative rounded-2xl h-auto mb-20">
+      <div className="max-w-none justify-center">
+        <div className="container max-w-[600px] relative rounded-2xl h-auto mb-20">
           <AspectRatio ratio={4 / 3}>
             <Image
               className="rounded-2xl object-cover"
