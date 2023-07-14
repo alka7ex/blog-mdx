@@ -57,15 +57,15 @@ const Featured: React.FC<Props> = () => {
   const blogs = getBlogFromParams();
   return (
     <div className="mx-auto">
-      <div className="grid w-auto h-auto grid-cols-1 md:p-5 mx-auto space-y-5 md:grid-cols-2 md:space-y-0 md:space-x-5 lg:mx-24 xl:mx-24">
+      <div className="grid w-auto h-auto grid-cols-1 md:p-5 mx-auto space-y-5 md:grid-cols-2 md:space-y-0 md:space-x-5 lg:mx-24">
         {blogs.map((blog) => (
-          <div key={blog.slug} className="container m-auto rounded-2xl">
-            <div className="h-60 md:h-72 xl:h-96 relative rounded-2xl">
+          <div key={blog.slug} className="container m-auto rounded-lg md:rounded-t-lg">
+            <div className="h-60 md:h-72 xl:h-96 relative rounded-lg md:rounded-t-lg">
               <Link href={"/blog/" + blog.slug} className="">
                 <Image
                   src={blog.thumbnail}
                   alt={blog.altthumbnail}
-                  className="rounded-2xl object-cover"
+                  className="rounded-lg md:rounded-t-lg object-cover"
                   fill
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   priority />
