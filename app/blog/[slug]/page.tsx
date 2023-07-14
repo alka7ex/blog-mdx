@@ -81,8 +81,7 @@ export const page = async ({ params }: Props) => {
             />
           </AspectRatio>
         </div>
-        <div className="container prose-pink max-w-[800px] text-foreground">
-          <h1 className="text-foreground">{blog.title}</h1>
+        <div className="container max-w-[800px] text-foreground">
           <Mdx code={blog.body.code} />
         </div>
       </div>
