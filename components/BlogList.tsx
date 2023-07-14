@@ -34,8 +34,8 @@ export const PageSize = 10;
 const BlogList: React.FC<Props> = () => {
   return (
     <div>
-      <div className="h-auto w-auto mx-auto flex flex-col">
-        <div className="container grid grid-cols-1 mx-auto space-y-5 md:grid-cols-2 md:space-y-5">
+      <div className="h-auto w-auto mx-auto flex flex-col lg:mx-24 xl:mx-24">
+        <div className=" grid grid-cols-1 mx-auto space-y-5 md:grid-cols-2 md:space-y-5">
           {allBlogs.map((post) => (
             <Card className="flex flex-col xl:mx-10 rounded-xl">
               <CardHeader className="">

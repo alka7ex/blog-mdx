@@ -17,7 +17,7 @@ import {
 
 export const Navbar = () => {
   return (
-    <nav className="container pl-4 pr-1 h-20 w-auto flex flex-wrap">
+    <nav className="container pl-4 pr-1 h-20 w-auto flex flex-wrap bg-header">
       <div className="my-auto">
         <Link href='/' className="text-2xl text-bold">
           <Image
@@ -35,12 +35,12 @@ export const Navbar = () => {
           <Search></Search>
         </div>
         <div className="my-auto mx-4">
-          <ModeToggle></ModeToggle>
+          <ModeToggle aria-label="theme"></ModeToggle>
         </div>
-        <div className="my-auto mr-2">
-          <DropdownMenu>
+        <div className="my-auto mr-2" >
+          <DropdownMenu >
             <DropdownMenuTrigger asChild>
-              <Button variant="outline" size="icon">
+              <Button variant="outline" size="icon" aria-label="dropdown">
                 <Menu />
               </Button>
             </DropdownMenuTrigger>

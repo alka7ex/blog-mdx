@@ -44,3 +44,12 @@ const page = async ({ bio,experience,skills,tools,education,course,createdAt,upd
   );
 };
 export default page;
+
+export const generateMetadata = () => {
+  return (
+    {
+      title: "Farhienza Haikal Resume",
+      description: "Resume of Farhienza Haikal as Product Manager, which PM with a focus on improving user experience and handling internal system, proficient with connecting 3rd party tools to test and learn or lauch quick MVP, and experienced with both B2B and B2C Business",
+    }
+  )
+}
