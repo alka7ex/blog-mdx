@@ -29,19 +29,17 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <body className=''>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <section><Navbar /></section>
-          <section className='min-h-screen' >{children}</section>
+          <section className='min-h-screen ' >{children}</section>
           <section><Footer /></section>
         </ThemeProvider>
-        {/* <Script strategy="lazyOnload" src='https://www.googletagmanager.com/gtag/js?id=G-K9JFYBBM5Z'
+        <Script strategy="lazyOnload" src='https://www.googletagmanager.com/gtag/js?id=G-K9JFYBBM5Z'
         />
         <Script id='google-analyics-script' strategy="lazyOnload">
           {`window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments)};
           gtag('js', new Date());
            gtag('config', 'G-K9JFYBBM5Z');`}
-        </Script> */}
-        <Script strategy="lazyOnload" defer data-domain="farhienza-haikal.my.id" 
-        src="http://plausible.caprover1.farhienza-haikal.my.id/js/script.js"></Script>
+        </Script>
       </body>
     </html>
   )
