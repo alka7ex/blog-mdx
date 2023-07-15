@@ -58,17 +58,14 @@ const Search: React.FC<Props> = () => {
     const bodyContent = body.code.toString();
     return (
       title.toLowerCase().includes(lowerCaseSearchQuery) ||
-      description.toLowerCase().includes(lowerCaseSearchQuery) ||
-      tags.some((tag) => tag.toLowerCase().includes(lowerCaseSearchQuery)) ||
-      bodyContent.toLowerCase().includes(lowerCaseSearchQuery) ||
-      slug.toLowerCase().includes(lowerCaseSearchQuery)
+      description.toLowerCase().includes(lowerCaseSearchQuery)
     );
   });
   return (
     <div>
       <div className="h-auto w-auto mx-auto flex flex-col">
         <div className=" grid grid-cols-1 mx-auto md:grid-cols-2 lg:mx-52">
-          {allBlogs.map((post) => (
+          {filteredBlogs.map((post) => (
             <Card className="flex flex-col md:mx-5 mb-5">
               <CardHeader className="">
                 <div className="container h-60 w-90 relative ">

@@ -53,7 +53,7 @@ const TagSearch: React.FC<Props> = () => {
     <div>
       <div className="h-auto w-auto mx-auto flex flex-col">
         <div className=" grid grid-cols-1 mx-auto md:grid-cols-2 lg:mx-52">
-          {allBlogs.map((post) => (
+          {filteredBlogs.map((post) => (
             <Card className="flex flex-col md:mx-5 mb-5">
               <CardHeader className="">
                 <div className="container h-60 w-90 relative ">
