@@ -1,15 +1,13 @@
+import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import {
   Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card"
-import { Button } from "@/components/ui/button";
+} from "@/components/ui/card";
 import { allBlogs } from "@/.contentlayer/generated";
+import { Button } from "@/components/ui/button";
 
 export interface Props {
   params: {
@@ -25,19 +23,29 @@ export interface Props {
       thumbnail: string;
       data?: any;
       meta?: any;
-    }
-  }
+    };
+  };
 }
 
 export const PageSize = 10;
 
 const BlogList: React.FC<Props> = () => {
+  // Sort the allBlogs array by date in descending order
+  const sortedBlogs = allBlogs.slice().sort((a, b) => {
+    // Convert date strings to Date objects for comparison
+    const dateA = new Date(a.date);
+    const dateB = new Date(b.date);
+    
+    // Compare and return the comparison result
+    return dateB - dateA;
+  });
+
   return (
     <div>
       <div className="h-auto w-auto mx-auto flex flex-col">
-        <div className=" grid grid-cols-1 mx-auto md:grid-cols-2 lg:mx-52">
-          {allBlogs.map((post) => (
-            <Card className="flex flex-col md:mx-5 mb-5">
+        <div className="grid grid-cols-1 mx-auto md:grid-cols-2 lg:mx-52">
+          {sortedBlogs.map((post) => (
+            <Card key={post.slug} className="flex flex-col md:mx-5 mb-5">
               <CardHeader className="">
                 <div className="container h-60 w-90 relative ">
                   <Link href={"/blog/" + post.slug} className="container">
@@ -55,9 +63,9 @@ const BlogList: React.FC<Props> = () => {
                 <Link href={"/blog/" + post.slug}>
                   <h2 className="card-title">{post.title}</h2>
                 </Link>
-                <div className="flex flex-row mt-2 space-x-2"> {/* Wrap the tags in a single div with flex layout */}
+                <div className="flex flex-row mt-2 space-x-2">
                   {post.tags.map((tag) => (
-                    <div className="flex flex-col md:flex-row mx-max"> {/* Use a single div for each tag */}
+                    <div key={tag} className="flex flex-col md:flex-row mx-max">
                       <Link href={"/tags?q=" + tag}>
                         <Button variant="link" className="justify-start p-1 w-auto h-auto text-xs text-foreground">
                           {tag}
@@ -74,6 +82,5 @@ const BlogList: React.FC<Props> = () => {
     </div>
   );
 };
-
 
 export default BlogList;
